@@ -1,0 +1,49 @@
+EduMEasy - Algebra Summer Camp Platform
+Architecture Overview
+
+1. Overall Architecture
+-----------------------
+The project follows a full-stack Client-Server architecture using the MERN stack (MongoDB, Express.js, React.js, Node.js).
+
+2. Backend (Server-Side)
+------------------------
+- Core: Node.js & Express.js
+- Database: MongoDB (Atlas or Local) using Mongoose ODM.
+- Authentication & Security:
+    - Google OAuth2 integration via Passport.js.
+    - PASETO (v4.local) for secure, stateless token management (stored in httpOnly cookies).
+    - Middleware-based role verification (Admin/User).
+- Directory Structure:
+    - /models: Mongoose schemas (User, Order, Class, etc.).
+    - /routes: API endpoints organized by domain (auth, orders, admin).
+    - /middleware: Auth guards and request validation logic.
+    - /utils: Helper functions (PASETO sign/verify, etc.).
+    - server.js: Main entry point for the Express application.
+
+3. Frontend (Client-Side)
+-------------------------
+- Core: React.js (Vite-powered).
+- Styling: Custom Vanilla CSS with a focus on premium, modern aesthetics (Glassmorphism, gradients).
+- Key Libraries: 
+    - Framer Motion for smooth animations.
+    - Lucide React for modern iconography.
+    - React Router for client-side navigation.
+- Directory Structure:
+    - /src/pages: Main view components (Dashboard, AdminPanel, Landing).
+    - /src/components: Reusable UI elements (Navbar, Sidebar, Modal).
+    - /src/assets: Static resources (Images, SVGs).
+    - index.css: Global styles and CSS variables.
+
+4. Data Flow
+------------
+- User authenticates via Google OAuth.
+- Server generates a PASETO token and sets it in an httpOnly cookie.
+- Client React app interacts with the Backend via RESTful API calls.
+- Protected routes on the backend verify the token in the cookie before processing requests.
+
+5. Key Features
+---------------
+- Dynamic Dashboard for students.
+- Comprehensive Admin Panel for session and user management.
+- Secure payment integration (Razorpay placeholder/logic).
+- Real-time interaction placeholders (Live Class portal).

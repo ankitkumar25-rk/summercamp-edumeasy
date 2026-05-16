@@ -1,0 +1,68 @@
+.overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 2000;
+    padding: 20px;
+}
+
+.backdrop {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(26, 26, 46, 0.4);
+    backdrop-filter: blur(8px);
+    -webkit-backdrop-filter: blur(8px);
+}
+
+.modalContent {
+    background-color: var(--card);
+    width: 100%;
+    max-width: 550px;
+    border-radius: var(--radius-lg);
+    border: var(--border-fun);
+    box-shadow: 0 12px 0 var(--primary-dark);
+    position: relative;
+    z-index: 1;
+    overflow: hidden;
+}
+
+.header {
+    padding: 24px 30px;
+    background-color: var(--primary);
+    color: var(--text-light);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-bottom: var(--border-fun);
+}
+
+.header h3 {
+    font-size: 1.5rem;
+    margin: 0;
+}
+
+.closeBtn {
+    color: var(--text-light);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: var(--transition);
+}
+
+.closeBtn:hover {
+    transform: scale(1.1) rotate(90deg);
+}
+
+.body {
+    padding: 30px;
+    max-height: 80vh;
+    overflow-y: auto;
+}

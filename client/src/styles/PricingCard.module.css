@@ -1,0 +1,116 @@
+.section {
+    padding: 100px 0;
+}
+
+.pricingBox {
+    max-width: 600px;
+    margin: 0 auto;
+    background-color: white;
+    border: var(--border-fun);
+    border-radius: var(--radius-lg);
+    padding: 60px;
+    text-align: center;
+    position: relative;
+    box-shadow: 0 15px 0 var(--primary-dark);
+}
+
+.popularBadge {
+    position: absolute;
+    top: -20px;
+    left: 50%;
+    transform: translateX(-50%);
+    background-color: var(--danger);
+    color: white;
+    padding: 8px 24px;
+    border-radius: var(--radius-pill);
+    font-weight: 900;
+    font-size: 0.9rem;
+    border: 3px solid var(--primary-dark);
+    box-shadow: 0 4px 0 var(--primary-dark);
+    font-family: var(--font-display);
+}
+
+.title {
+    font-size: 2.5rem;
+    margin-bottom: 30px;
+    color: var(--primary);
+}
+
+.price {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
+    margin-bottom: 40px;
+}
+
+.currency {
+    font-size: 1.5rem;
+    font-weight: 900;
+    color: var(--text-muted);
+}
+
+.amount {
+    font-size: 5rem;
+    font-family: var(--font-display);
+    color: var(--text-dark);
+    line-height: 1;
+}
+
+.original {
+    font-size: 1.2rem;
+    color: var(--text-muted);
+    text-decoration: line-through;
+    font-weight: 700;
+}
+
+.features {
+    text-align: left;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    margin-bottom: 50px;
+}
+
+.featureItem {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    font-size: 1.2rem;
+    font-weight: 800;
+    color: var(--text-dark);
+}
+
+.checkIcon {
+    color: var(--success);
+    flex-shrink: 0;
+}
+
+.bonusIcon {
+    color: var(--accent);
+    flex-shrink: 0;
+    animation: wiggle 2s infinite;
+}
+
+.cta {
+    width: 100%;
+    margin-bottom: 20px;
+}
+
+.footerText {
+    font-size: 0.9rem;
+    color: var(--text-muted);
+    font-weight: 700;
+}
+
+@media (max-width: 600px) {
+    .pricingBox {
+        padding: 40px 20px;
+    }
+    .amount {
+        font-size: 3.5rem;
+    }
+    .featureItem {
+        font-size: 1rem;
+    }
+}

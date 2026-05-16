@@ -1,0 +1,63 @@
+.section {
+    padding: 80px 20px;
+}
+
+.banner {
+    background-color: var(--primary);
+    border-radius: var(--radius-lg);
+    border: var(--border-fun);
+    padding: 80px 60px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    position: relative;
+    overflow: hidden;
+    box-shadow: 0 15px 0 var(--primary-dark);
+}
+
+.content {
+    max-width: 600px;
+    position: relative;
+    z-index: 2;
+}
+
+.title {
+    color: white;
+    font-size: 3.5rem;
+    margin-bottom: 20px;
+    line-height: 1.1;
+    text-shadow: 4px 4px 0px var(--primary-dark);
+}
+
+.subtitle {
+    color: rgba(255, 255, 255, 0.8);
+    font-size: 1.4rem;
+    font-weight: 700;
+}
+
+.ctaBtn {
+    position: relative;
+    z-index: 2;
+    animation: wiggle 3s infinite;
+}
+
+.floatIcon {
+    position: absolute;
+    right: -20px;
+    top: 50%;
+    transform: translateY(-50%) rotate(-15deg);
+    color: rgba(255, 255, 255, 0.1);
+    z-index: 1;
+}
+
+@media (max-width: 992px) {
+    .banner {
+        flex-direction: column;
+        text-align: center;
+        gap: 40px;
+        padding: 60px 30px;
+    }
+    .title {
+        font-size: 2.5rem;
+    }
+}

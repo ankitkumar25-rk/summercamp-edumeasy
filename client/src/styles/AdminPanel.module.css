@@ -1,0 +1,158 @@
+.wrapper {
+    min-height: 100vh;
+    background-color: var(--bg);
+}
+
+.main {
+    padding: 60px 20px 120px;
+}
+
+.title {
+    font-size: 3rem;
+    color: var(--primary);
+    text-shadow: 3px 3px 0 var(--accent);
+    margin-bottom: 40px;
+    text-align: center;
+}
+
+.tabs {
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+    margin-bottom: 40px;
+}
+
+.tab {
+    padding: 12px 30px;
+    border-radius: var(--radius-pill);
+    font-family: var(--font-display);
+    font-size: 1.1rem;
+    border: var(--border-fun);
+    background-color: white;
+    transition: var(--transition);
+}
+
+.tabActive {
+    background-color: var(--accent);
+    color: var(--primary);
+    box-shadow: 0 6px 0 var(--accent-dark);
+    transform: translateY(-4px);
+}
+
+.content {
+    background-color: white;
+    border: var(--border-fun);
+    border-radius: var(--radius-lg);
+    padding: 40px;
+    box-shadow: 0 12px 0 var(--primary-dark);
+}
+
+.table {
+    width: 100%;
+    border-collapse: separate;
+    border-spacing: 0 10px;
+}
+
+.table th {
+    text-align: left;
+    padding: 15px 20px;
+    font-family: var(--font-display);
+    color: var(--text-muted);
+}
+
+.table td {
+    padding: 15px 20px;
+    background-color: var(--bg);
+}
+
+.table tr td:first-child { border-radius: 15px 0 0 15px; }
+.table tr td:last-child { border-radius: 0 15px 15px 0; }
+
+.userInfo {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+}
+
+.avatar {
+    width: 45px;
+    height: 45px;
+    border-radius: 50%;
+    border: 2px solid var(--primary);
+}
+
+.userName {
+    font-weight: 800;
+}
+
+.userEmail {
+    font-size: 0.85rem;
+    opacity: 0.6;
+}
+
+.badge {
+    padding: 5px 12px;
+    border-radius: 10px;
+    font-weight: 900;
+    font-size: 0.8rem;
+}
+
+.paid { background-color: var(--success); color: white; }
+.unpaid { background-color: var(--danger); color: white; }
+
+.actionsBar {
+    margin-bottom: 30px;
+}
+
+.classGrid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 20px;
+}
+
+.classCard {
+    padding: 25px;
+    background-color: var(--bg);
+    border-radius: var(--radius);
+    border: 2px solid var(--primary-dark);
+}
+
+.classCard h3 {
+    margin-bottom: 10px;
+}
+
+.cardActions {
+    display: flex;
+    gap: 10px;
+    margin-top: 20px;
+}
+
+.form {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.field {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+.field label {
+    font-weight: 900;
+    color: var(--primary);
+}
+
+.field input, .field textarea {
+    padding: 12px 20px;
+    border-radius: 15px;
+    border: 2px solid var(--primary);
+    font-size: 1rem;
+    font-weight: 700;
+}
+
+.field textarea {
+    height: 100px;
+    resize: none;
+}

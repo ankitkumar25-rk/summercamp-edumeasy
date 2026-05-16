@@ -1,0 +1,136 @@
+@import url('https://fonts.googleapis.com/css2?family=Fredoka+One&family=Nunito:wght@400;600;700;800;900;1000&display=swap');
+
+:root {
+  /* Colors */
+  --primary: #3D1A8E;
+  --primary-dark: #2A0F6E;
+  --accent: #F5A623;
+  --accent-dark: #D4880A;
+  --danger: #E63329;
+  --danger-dark: #B82820;
+  --success: #22C55E;
+  --success-dark: #16A34A;
+  
+  --bg: #F5F0E8;
+  --bg-dots: repeating-radial-gradient(
+               circle at 0 0, transparent 0,
+               #F5F0E8 8px),
+             repeating-linear-gradient(
+               #E8E0D0 1px, transparent 1px);
+  
+  --card: #FFFFFF;
+  --text-dark: #1A1A2E;
+  --text-muted: #7C7C9A;
+  --text-light: #FFFFFF;
+  
+  /* Borders & Radius */
+  --border-fun: 3px solid var(--primary);
+  --radius: 22px;
+  --radius-lg: 32px;
+  --radius-pill: 50px;
+  
+  /* Fonts */
+  --font-display: 'Fredoka One', cursive;
+  --font-body: 'Nunito', sans-serif;
+  
+  /* Shadows */
+  --shadow-primary: 0 6px 0 var(--primary-dark);
+  --shadow-accent: 0 6px 0 var(--accent-dark);
+  --shadow-danger: 0 6px 0 var(--danger-dark);
+  --shadow-success: 0 6px 0 var(--success-dark);
+  --shadow-card: 0 8px 24px rgba(61, 26, 142, 0.1);
+  
+  --transition: all 0.2s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  -webkit-tap-highlight-color: transparent;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  font-family: var(--font-body);
+  background-color: var(--bg);
+  background-image: radial-gradient(#E8E0D0 1.5px, transparent 1.5px);
+  background-size: 24px 24px;
+  color: var(--text-dark);
+  overflow-x: hidden;
+  line-height: 1.5;
+}
+
+h1, h2, h3, h4, h5, h6 {
+  font-family: var(--font-display);
+  font-weight: normal;
+  line-height: 1.2;
+}
+
+a {
+  text-decoration: none;
+  color: inherit;
+  transition: var(--transition);
+}
+
+button {
+  cursor: pointer;
+  border: none;
+  background: none;
+  font-family: var(--font-body);
+}
+
+input, textarea {
+  font-family: var(--font-body);
+}
+
+/* Global Container */
+.container {
+  width: 100%;
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 20px;
+}
+
+/* Animations */
+@keyframes wiggle {
+  0%, 100% { transform: rotate(0deg); }
+  25% { transform: rotate(-8deg); }
+  75% { transform: rotate(8deg); }
+}
+
+@keyframes float {
+  0%, 100% { transform: translateY(0px); }
+  50% { transform: translateY(-10px); }
+}
+
+@keyframes shake {
+  0%, 100% { transform: translateX(0); }
+  25% { transform: translateX(-5px); }
+  75% { transform: translateX(5px); }
+}
+
+.animate-wiggle { animation: wiggle 2s ease-in-out infinite; }
+.animate-float { animation: float 3s ease-in-out infinite; }
+
+/* Custom Scrollbar */
+::-webkit-scrollbar {
+  width: 10px;
+}
+
+::-webkit-scrollbar-track {
+  background: var(--bg);
+}
+
+::-webkit-scrollbar-thumb {
+  background: var(--primary);
+  border-radius: 10px;
+  border: 2px solid var(--bg);
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: var(--primary-dark);
+}
