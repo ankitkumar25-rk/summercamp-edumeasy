@@ -157,6 +157,9 @@
 .hamburger::after { bottom: -10px; }
 
 @media (max-width: 992px) {
+    .navbar {
+        height: 75px;
+    }
     .desktopNav {
         display: none;
     }
@@ -164,33 +167,56 @@
         display: flex;
         align-items: center;
         justify-content: center;
+        width: 45px;
+        height: 45px;
+        border-radius: 12px;
+        border: 2px solid var(--primary);
+        background: white;
+    }
+    .logoImg {
+        height: 55px;
+    }
+    .logo {
+        font-size: 1.4rem;
+    }
+    .authSection {
+        gap: 10px;
     }
 }
 
 .mobileMenu {
-    position: absolute;
-    top: 85px;
+    position: fixed;
+    top: 75px;
     left: 0;
     width: 100%;
+    height: calc(100vh - 75px);
     background-color: var(--card);
-    border-bottom: var(--border-fun);
     display: flex;
     flex-direction: column;
-    padding: 20px;
-    gap: 15px;
-    box-shadow: 0 10px 20px rgba(0,0,0,0.1);
+    padding: 40px 20px;
+    gap: 20px;
+    z-index: 2000;
+    overflow-y: auto;
+    animation: slideIn 0.3s ease-out;
+}
+
+@keyframes slideIn {
+    from { transform: translateY(-10px); opacity: 0; }
+    to { transform: translateY(0); opacity: 1; }
 }
 
 .mobileNavLink {
-    font-size: 1.5rem;
+    font-size: 1.8rem;
     font-family: var(--font-display);
-    padding: 10px;
+    padding: 20px;
     text-align: center;
-    border: 2px solid transparent;
+    border: 3px solid var(--primary);
     border-radius: var(--radius);
+    background: white;
+    box-shadow: 0 6px 0 var(--primary);
 }
 
 .mobileNavLink:active {
-    background-color: var(--bg);
-    border-color: var(--primary);
+    transform: translateY(4px);
+    box-shadow: 0 2px 0 var(--primary);
 }

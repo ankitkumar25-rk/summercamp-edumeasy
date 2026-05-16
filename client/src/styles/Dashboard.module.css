@@ -240,12 +240,35 @@
 }
 
 @media (max-width: 992px) {
+    .main {
+        padding: 40px 15px 100px;
+    }
     .header {
         flex-direction: column;
         text-align: center;
+        margin-bottom: 30px;
+        gap: 20px;
+    }
+    .welcome {
+        font-size: 2.2rem;
+    }
+    .levelCard {
+        max-width: 100%;
+        padding: 15px 20px;
     }
     .scheduleGrid {
         grid-template-columns: repeat(2, 1fr);
+        gap: 15px;
+    }
+    .liveNowCard {
+        flex-direction: column;
+        padding: 25px;
+        text-align: center;
+        gap: 20px;
+    }
+    .liveLeft {
+        flex-direction: column;
+        gap: 10px;
     }
 }
 
@@ -253,9 +276,46 @@
     .scheduleGrid {
         grid-template-columns: 1fr;
     }
-    .liveNowCard {
+    .tabs {
+        overflow-x: auto;
+        padding: 5px 5px 15px;
+        width: 100%;
+        justify-content: flex-start;
+        -webkit-overflow-scrolling: touch;
+        scrollbar-width: none;
+    }
+    .tabs::-webkit-scrollbar {
+        display: none;
+    }
+    .tab {
+        white-space: nowrap;
+        padding: 10px 20px;
+        font-size: 0.9rem;
+        flex-shrink: 0;
+    }
+    .leaderboard {
+        padding: 20px;
+    }
+    .lbHeader {
         flex-direction: column;
-        gap: 20px;
         text-align: center;
+        gap: 10px;
+    }
+    .lbIcon {
+        font-size: 2.5rem;
+    }
+    .lbRow {
+        padding: 15px;
+        gap: 10px;
+    }
+    .lbRank {
+        width: 30px;
+        font-size: 1.1rem;
+    }
+    .lbName {
+        font-size: 1rem;
+    }
+    .lbXp {
+        font-size: 1rem;
     }
 }
