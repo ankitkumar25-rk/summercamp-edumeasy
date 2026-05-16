@@ -17,6 +17,7 @@ app.use(cors({
     origin: process.env.CLIENT_URL,
     credentials: true
 }));
+app.use(passport.initialize());
 
 // Database Connection
 mongoose.connect(process.env.MONGODB_URI)
