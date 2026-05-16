@@ -14,7 +14,7 @@ const razorpay = new Razorpay({
 });
 */
 
-const CAMP_PRICE_INR = 499; // Total price inclusive of GST
+const CAMP_PRICE_INR = 200; // Total price inclusive of GST
 
 // Create Order (Mocked)
 router.post('/create', authMiddleware, async (req, res) => {

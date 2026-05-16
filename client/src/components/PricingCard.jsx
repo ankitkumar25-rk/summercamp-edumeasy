@@ -71,8 +71,8 @@ const PricingCard = () => {
                         <h2 className={styles.title}>All-Access Pass</h2>
                         <div className={styles.price}>
                             <span className={styles.currency}>₹</span>
-                            <span className={styles.amount}>999</span>
-                            <span className={styles.original}>₹2999</span>
+                            <span className={styles.amount}>200</span>
+                            <span className={styles.original}>₹999</span>
                         </div>
                     </div>
 

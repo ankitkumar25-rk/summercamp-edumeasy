@@ -21,7 +21,7 @@ const HeroSection = ({ onEnroll }) => {
                     transition={{ duration: 0.6 }}
                 >
                     <div className={styles.badge}>
-                        <BsCalendarCheck /> <span>Summer 2026 · 50 Slots Left</span>
+                        <BsCalendarCheck /> <span>15 May - 28 May 2026 · Limited Seats</span>
                     </div>
                     <h1 className={styles.title}>
                         Unlock Your <span className={styles.highlight}>Algebra</span> Superpowers!
