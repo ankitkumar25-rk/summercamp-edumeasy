@@ -15,7 +15,17 @@ const { verifyToken } = require('../middleware/auth');
 const requireAjax = (req, res, next) => {
     // Basic CSRF check
     const origin = req.headers.origin || req.headers.referer;
-    if (origin && !origin.startsWith(process.env.CLIENT_URL)) {
+    
+    const allowedClientUrl = process.env.CLIENT_URL;
+    const sameOriginUrl = req.protocol + '://' + req.get('host');
+    
+    const isAllowed = origin && (
+        (allowedClientUrl && origin.startsWith(allowedClientUrl)) ||
+        origin.startsWith(sameOriginUrl) ||
+        (process.env.NODE_ENV === 'production' && origin.includes('onrender.com'))
+    );
+
+    if (origin && !isAllowed) {
         return res.status(403).json({ message: 'Forbidden origin' });
     }
     const requestedWith = req.headers['x-requested-with'];
