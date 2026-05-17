@@ -4,7 +4,7 @@ import PropTypes from 'prop-types';
 
 const AuthContext = createContext();
 
-const API_URL = import.meta.env.VITE_API_URL || 'http://localhost:5000';
+const API_URL = import.meta.env.VITE_API_URL || (window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1' ? 'http://localhost:5000' : window.location.origin);
 
 // Global Axios configuration to satisfy CSRF protection layer
 axios.defaults.headers.common['X-Requested-With'] = 'XMLHttpRequest';
