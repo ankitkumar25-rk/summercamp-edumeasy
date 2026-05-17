@@ -21,13 +21,14 @@ const HeroSection = ({ onEnroll }) => {
                     transition={{ duration: 0.6 }}
                 >
                     <div className={styles.badge}>
-                        <BsCalendarCheck /> <span>15 May - 28 May 2026 · Limited Seats</span>
+                        <BsCalendarCheck /> <span>June 02 – June 06, 2026 · Online Live Classes</span>
                     </div>
                     <h1 className={styles.title}>
-                        Unlock Your <span className={styles.highlight}>Algebra</span> Superpowers!
+                        5 DAYS ONLINE SUMMER CAMP ON <span className={styles.highlight}>ALGEBRA</span>
                     </h1>
                     <p className={styles.subtitle}>
-                        The most exciting 5-day LIVE camp where school kids learn math like a video game. Solve puzzles, earn XP, and become a Math Legend!
+                        <strong>Learning Math By Doing Math</strong><br/>
+                        Learn Algebra | Build Logic | Prepare for the Future
                     </p>
                     <div className={styles.actions}>
                         <Button variant="accent" size="lg" onClick={onEnroll}>

@@ -8,24 +8,24 @@ import styles from '../styles/FeatureCards.module.css';
 const FeatureCards = () => {
     const features = [
         {
-            title: 'XP Rewards',
-            desc: 'Earn points and level up your math game. Who says learning can’t be winning?',
+            title: 'Remove Math Fear',
+            desc: 'Make Math simple, interesting and stress-free while building confidence.',
             icon: <HiLightningBolt />,
             color: 'var(--accent)',
             animation: 'wiggle'
         },
         {
-            title: 'Live Portal',
-            desc: 'Interact with teachers in real-time. Join from anywhere in the world!',
-            icon: <RiLiveLine />,
-            color: 'var(--danger)',
+            title: 'Coding Readiness',
+            desc: 'Learn the mathematical foundation for coding and programming.',
+            icon: <MdDevices />,
+            color: 'var(--primary)',
             animation: 'float'
         },
         {
-            title: 'Any Device',
-            desc: 'Tablets, laptops, or phones. Learn on what you love most.',
-            icon: <MdDevices />,
-            color: 'var(--primary)',
+            title: 'Future Innovations',
+            desc: 'Explore how Algebra powers AI, machine learning, and new tech.',
+            icon: <RiLiveLine />,
+            color: 'var(--danger)',
             animation: 'wiggle'
         }
     ];

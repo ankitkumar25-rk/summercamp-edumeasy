@@ -3,11 +3,10 @@ const router = express.Router();
 const User = require('../models/User');
 const Class = require('../models/Class');
 const Order = require('../models/Order');
-const authMiddleware = require('../middleware/authMiddleware');
-const { isAdmin } = require('../middleware/roleMiddleware');
+const { verifyToken, requireAdmin } = require('../middleware/auth');
 
 // Apply admin protection to all routes in this file
-router.use(authMiddleware, isAdmin);
+router.use(verifyToken, requireAdmin);
 
 // --- USERS ---
 router.get('/users', async (req, res) => {

@@ -6,10 +6,19 @@ const User = require('../models/User');
 router.get('/', async (req, res) => {
     try {
         const topStudents = await User.find()
-            .select('name xp picture')
+            .select('fullName xp level')
             .sort({ xp: -1 })
             .limit(10);
-        res.json(topStudents);
+            
+        // Map fullName to name for backward compatibility with the frontend
+        const mappedStudents = topStudents.map(student => ({
+            _id: student._id,
+            name: student.fullName,
+            xp: student.xp,
+            level: student.level
+        }));
+        
+        res.json(mappedStudents);
     } catch (err) {
         res.status(500).json({ message: 'Server error' });
     }

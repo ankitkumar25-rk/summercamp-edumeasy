@@ -4,7 +4,7 @@ const router = express.Router();
 const crypto = require('crypto');
 const Order = require('../models/Order');
 const User = require('../models/User');
-const authMiddleware = require('../middleware/authMiddleware');
+const { verifyToken } = require('../middleware/auth');
 require('dotenv').config();
 
 /* 
@@ -17,7 +17,7 @@ const razorpay = new Razorpay({
 const CAMP_PRICE_INR = 200; // Total price inclusive of GST
 
 // Create Order (Mocked)
-router.post('/create', authMiddleware, async (req, res) => {
+router.post('/create', verifyToken, async (req, res) => {
     const amount = CAMP_PRICE_INR * 100; // in paise
 
     try {
@@ -40,7 +40,7 @@ router.post('/create', authMiddleware, async (req, res) => {
 });
 
 // Verify Payment (Mocked)
-router.post('/verify', authMiddleware, async (req, res) => {
+router.post('/verify', verifyToken, async (req, res) => {
     const { razorpay_order_id } = req.body;
 
     // For testing, we skip signature verification

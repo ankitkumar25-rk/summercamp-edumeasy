@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { FaTrophy, FaMedal, FaLock } from 'react-icons/fa';
+import { useNavigate } from 'react-router-dom';
+import { FaTrophy, FaMedal, FaLock, FaExclamationTriangle } from 'react-icons/fa';
 import { HiLightningBolt } from 'react-icons/hi';
 import { BsCheckCircleFill, BsLightningChargeFill } from 'react-icons/bs';
 import { RiLiveLine } from 'react-icons/ri';
@@ -15,6 +16,7 @@ import Loader from '../components/Loader';
 const Dashboard = () => {
     const { user } = useAuth();
     const api = useApi();
+    const navigate = useNavigate();
     const [activeTab, setActiveTab] = useState('overview');
     const [leaderboard, setLeaderboard] = useState([]);
     const [loading, setLoading] = useState(true);
@@ -60,9 +62,23 @@ const Dashboard = () => {
     return (
         <div className={styles.wrapper}>
             <Navbar />
+            {!user?.isEmailVerified && (
+                <div style={{ backgroundColor: 'var(--danger)', color: 'white', padding: '12px', textAlign: 'center', fontWeight: 'bold', borderBottom: '3px solid var(--danger-dark)', zIndex: 10, position: 'relative' }}>
+                    <FaExclamationTriangle style={{ marginRight: '8px', marginBottom: '-2px' }} />
+                    Your email is not verified! Please verify your email to secure your account.
+                    <button 
+                        onClick={() => navigate('/verify-email', { state: { email: user?.email } })}
+                        style={{ marginLeft: '15px', padding: '6px 16px', borderRadius: '20px', border: '2px solid white', background: 'transparent', color: 'white', cursor: 'pointer', fontWeight: 'bold', transition: 'all 0.3s' }}
+                        onMouseOver={(e) => { e.target.style.background = 'white'; e.target.style.color = 'var(--danger)'; }}
+                        onMouseOut={(e) => { e.target.style.background = 'transparent'; e.target.style.color = 'white'; }}
+                    >
+                        Verify Now
+                    </button>
+                </div>
+            )}
             <div className={`container ${styles.main}`}>
                 <div className={styles.header}>
-                    <h1 className={styles.welcome}>Welcome back, {user?.name.split(' ')[0]}!</h1>
+                    <h1 className={styles.welcome}>Welcome back, {user?.fullName?.split(' ')[0] || 'Student'}!</h1>
                     <div className={styles.levelCard}>
                         <div className={styles.levelInfo}>
                             <span className={styles.levelName}>{currentLevel.name}</span>

@@ -83,19 +83,15 @@ const PricingCard = () => {
                         </div>
                         <div className={styles.featureItem}>
                             <BsCheckCircleFill className={styles.checkIcon} />
-                            <span>Daily XP Challenges & Rewards</span>
+                            <span>Daily Practice Problems (DPP)</span>
                         </div>
                         <div className={styles.featureItem}>
                             <BsCheckCircleFill className={styles.checkIcon} />
-                            <span>Algebra Master Certificate</span>
-                        </div>
-                        <div className={styles.featureItem}>
-                            <BsCheckCircleFill className={styles.checkIcon} />
-                            <span>Life-time access to recordings</span>
+                            <span>Parent & IITian Interaction Sessions</span>
                         </div>
                         <div className={styles.featureItem}>
                             <BsLightningChargeFill className={styles.bonusIcon} />
-                            <span>Bonus: Algebra Cheat Sheet PDF</span>
+                            <span>Bonus: Top 10 get FREE SEATS in Advanced Workshop!</span>
                         </div>
                     </div>
 

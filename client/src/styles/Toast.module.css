@@ -20,6 +20,8 @@
     border: var(--border-fun);
     font-weight: 800;
     box-shadow: 0 6px 0 var(--primary-dark);
+    background-color: var(--card);
+    color: var(--text-dark);
 }
 
 .icon {
@@ -30,25 +32,27 @@
 
 .message {
     font-size: 1rem;
+    flex: 1;
+    word-break: break-word;
 }
 
 .success {
-    background-color: var(--success);
-    color: var(--text-light);
-    border-color: var(--primary-dark);
-    box-shadow: 0 6px 0 var(--primary-dark);
+    background-color: var(--success) !important;
+    color: var(--text-light) !important;
+    border-color: var(--primary-dark) !important;
+    box-shadow: 0 6px 0 var(--primary-dark) !important;
 }
 
 .error {
-    background-color: var(--danger);
-    color: var(--text-light);
-    border-color: var(--danger-dark);
-    box-shadow: 0 6px 0 var(--danger-dark);
+    background-color: var(--danger) !important;
+    color: var(--text-light) !important;
+    border-color: var(--danger-dark) !important;
+    box-shadow: 0 6px 0 var(--danger-dark) !important;
 }
 
 .warning {
-    background-color: var(--accent);
-    color: var(--text-dark);
-    border-color: var(--accent-dark);
-    box-shadow: 0 6px 0 var(--accent-dark);
+    background-color: var(--accent) !important;
+    color: var(--text-dark) !important;
+    border-color: var(--accent-dark) !important;
+    box-shadow: 0 6px 0 var(--accent-dark) !important;
 }

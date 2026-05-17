@@ -1,16 +1,18 @@
 const { V3 } = require('paseto');
-const { crypto } = require('node:crypto');
 require('dotenv').config();
 
-// PASETO_SECRET_KEY should be a 32-byte hex string or 32-character string
+// PASETO_SECRET_KEY should be a 32-byte hex string
 const secretKey = process.env.PASETO_SECRET_KEY;
 
 async function signToken(payload) {
     try {
-        // payload: { userId, role, email }
+        // payload: { userId, role }
         const key = Buffer.from(secretKey, 'hex'); 
-        const token = await V3.encrypt(payload, key, {
-            expiresIn: '24h',
+        const token = await V3.encrypt({
+            userId: payload.userId,
+            role: payload.role
+        }, key, {
+            expiresIn: '15m',
             footer: 'EduMEasy'
         });
         return token;
@@ -24,10 +26,9 @@ async function verifyToken(token) {
     try {
         const key = Buffer.from(secretKey, 'hex');
         const payload = await V3.decrypt(token, key);
-        return payload;
+        return { userId: payload.userId, role: payload.role };
     } catch (error) {
-        // console.error('Error verifying PASETO:', error);
-        return null;
+        throw new Error('Invalid or expired token');
     }
 }
 

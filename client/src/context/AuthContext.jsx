@@ -6,6 +6,9 @@ const AuthContext = createContext();
 
 const API_URL = import.meta.env.VITE_API_URL || 'http://localhost:5000';
 
+// Global Axios configuration to satisfy CSRF protection layer
+axios.defaults.headers.common['X-Requested-With'] = 'XMLHttpRequest';
+
 export const AuthProvider = ({ children }) => {
     const [user, setUser] = useState(null);
     const [loading, setLoading] = useState(true);
@@ -70,6 +73,9 @@ export const useApi = () => {
     const api = axios.create({
         baseURL: API_URL,
         withCredentials: true,
+        headers: {
+            'X-Requested-With': 'XMLHttpRequest'
+        }
     });
 
     api.interceptors.response.use(

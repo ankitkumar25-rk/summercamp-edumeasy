@@ -59,9 +59,16 @@ const Navbar = () => {
                             )}
                             <div className={styles.avatarWrapper} onClick={toggleDropdown}>
                                 {user.picture ? (
-                                    <img src={user.picture} alt={user.name} className={styles.avatar} />
+                                    <img src={user.picture} alt={user.fullName} className={styles.avatar} />
                                 ) : (
-                                    <FaUserCircle size={40} color="var(--primary)" />
+                                    <div className={styles.avatarPlaceholder} style={{
+                                        width: '40px', height: '40px', borderRadius: '50%',
+                                        backgroundColor: 'var(--primary)', color: 'white',
+                                        display: 'flex', alignItems: 'center', justifyContent: 'center',
+                                        fontWeight: 'bold', fontSize: '1.2rem'
+                                    }}>
+                                        {user.fullName ? user.fullName.charAt(0).toUpperCase() : <FaUserCircle size={24} />}
+                                    </div>
                                 )}
                                 {isDropdownOpen && (
                                     <div className={styles.dropdown}>
@@ -81,15 +88,24 @@ const Navbar = () => {
                             </div>
                         </div>
                     ) : (
-                        <Button 
-                            variant="accent" 
-                            size="md" 
-                            onClick={() => window.location.href = `${API_URL}/api/auth/google`}
-                        >
-                            <FaGoogle /> <span>Login</span>
-                        </Button>
+                        <div style={{ display: 'flex', gap: '10px' }}>
+                            <Button
+                                variant="outline"
+                                size="md"
+                                onClick={() => navigate('/login')}
+                            >
+                                <span>Log In</span>
+                            </Button>
+                            <Button
+                                variant="accent"
+                                size="md"
+                                onClick={() => navigate('/register')}
+                            >
+                                <span>Register Now</span>
+                            </Button>
+                        </div>
                     )}
-                    
+
                     {/* Mobile Toggle */}
                     <button className={styles.mobileToggle} onClick={toggleMenu}>
                         {isMenuOpen ? <IoClose size={32} /> : <div className={styles.hamburger}></div>}

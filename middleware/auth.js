@@ -1,27 +1,27 @@
 const { verifyToken } = require('../utils/paseto');
 
-async function protect(req, res, next) {
-    const token = req.cookies.token || (req.headers.authorization && req.headers.authorization.split(' ')[1]);
+const verifyTokenMiddleware = async (req, res, next) => {
+    const token = req.cookies.token;
 
     if (!token) {
-        return res.status(401).json({ message: 'Not authorized, no token' });
+        return res.status(401).json({ message: 'Unauthorized: No token provided' });
     }
 
-    const decoded = await verifyToken(token);
-    if (!decoded) {
-        return res.status(401).json({ message: 'Not authorized, token failed' });
+    try {
+        const payload = await verifyToken(token);
+        req.user = payload; // { userId, role }
+        next();
+    } catch (error) {
+        return res.status(401).json({ message: 'Unauthorized: Invalid or expired token' });
     }
+};
 
-    req.user = decoded;
-    next();
-}
-
-function adminOnly(req, res, next) {
+const requireAdmin = (req, res, next) => {
     if (req.user && req.user.role === 'admin') {
         next();
     } else {
-        res.status(403).json({ message: 'Admin access required' });
+        res.status(403).json({ message: 'Forbidden: Admins only' });
     }
-}
+};
 
-module.exports = { protect, adminOnly };
+module.exports = { verifyToken: verifyTokenMiddleware, requireAdmin };

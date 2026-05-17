@@ -2,10 +2,10 @@ const express = require('express');
 const router = express.Router();
 const Doubt = require('../models/Doubt');
 const User = require('../models/User');
-const authMiddleware = require('../middleware/authMiddleware');
+const { verifyToken } = require('../middleware/auth');
 
 // Submit a doubt
-router.post('/', authMiddleware, async (req, res) => {
+router.post('/', verifyToken, async (req, res) => {
     try {
         const { question } = req.body;
         const user = await User.findById(req.user.userId);

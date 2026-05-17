@@ -1,10 +1,10 @@
 const express = require('express');
 const router = express.Router();
 const Class = require('../models/Class');
-const authMiddleware = require('../middleware/authMiddleware');
+const { verifyToken } = require('../middleware/auth');
 
 // Get all classes
-router.get('/', authMiddleware, async (req, res) => {
+router.get('/', verifyToken, async (req, res) => {
     try {
         const classes = await Class.find().sort({ day: 1 });
         res.json(classes);
@@ -14,7 +14,7 @@ router.get('/', authMiddleware, async (req, res) => {
 });
 
 // Get today's class (simplified)
-router.get('/today', authMiddleware, async (req, res) => {
+router.get('/today', verifyToken, async (req, res) => {
     try {
         // In a real app, logic would check actual date. 
         // For now, return class based on a 'day' query or just the first one.

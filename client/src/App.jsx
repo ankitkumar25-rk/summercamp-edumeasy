@@ -15,6 +15,9 @@ import Landing from './pages/Landing';
 import Dashboard from './pages/Dashboard';
 import LiveClass from './pages/LiveClass';
 import AdminPanel from './pages/AdminPanel';
+import Login from './pages/Login';
+import Register from './pages/Register';
+import VerifyEmail from './pages/VerifyEmail';
 
 function App() {
   return (
@@ -25,6 +28,9 @@ function App() {
           <AnimatePresence mode="wait">
             <Routes>
               <Route path="/" element={<Landing />} />
+              <Route path="/login" element={<Login />} />
+              <Route path="/register" element={<Register />} />
+              <Route path="/verify-email" element={<VerifyEmail />} />
               
               <Route 
                 path="/dashboard" 

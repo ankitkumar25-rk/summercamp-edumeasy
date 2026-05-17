@@ -13,8 +13,8 @@ const ProtectedRoute = ({ children, requirePaid = false, requireAdmin = false })
     }
 
     if (!isAuthenticated) {
-        // Redirect to landing with a state to show login modal
-        return <Navigate to="/" state={{ from: location, showLogin: true }} replace />;
+        // Redirect to login
+        return <Navigate to="/login" state={{ from: location }} replace />;
     }
 
     if (requireAdmin && !isAdmin) {

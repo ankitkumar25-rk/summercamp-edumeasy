@@ -1,10 +1,10 @@
 const express = require('express');
 const router = express.Router();
 const User = require('../models/User');
-const authMiddleware = require('../middleware/authMiddleware');
+const { verifyToken } = require('../middleware/auth');
 
 // Mark Class as Attended
-router.post('/mark-attended', authMiddleware, async (req, res) => {
+router.post('/mark-attended', verifyToken, async (req, res) => {
     try {
         const { classId } = req.body;
         const user = await User.findById(req.user.userId);

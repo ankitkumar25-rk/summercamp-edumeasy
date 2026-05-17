@@ -9,8 +9,8 @@ const CTABanner = ({ onEnroll }) => {
         <section className={`container ${styles.section}`}>
             <div className={styles.banner}>
                 <div className={styles.content}>
-                    <h2 className={styles.title}>Ready to Level Up Your Math Skills?</h2>
-                    <p className={styles.subtitle}>Join 500+ students who transformed their Algebra fear into mastery.</p>
+                    <h2 className={styles.title}>Ready to Remove the Fear of Math?</h2>
+                    <p className={styles.subtitle}>Empowering young minds to enjoy, understand, and excel in Mathematics.</p>
                 </div>
                 <Button variant="accent" size="lg" onClick={onEnroll} className={styles.ctaBtn}>
                     <span>Grab Your Seat Now</span>

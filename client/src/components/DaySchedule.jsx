@@ -12,43 +12,43 @@ const DaySchedule = () => {
     const days = [
         { 
             id: 1, 
-            day: 'Day 1', 
-            title: 'Variable Valley', 
+            day: '02 June', 
+            title: 'Variables & Expressions', 
             icon: <TbVariable size={32} />, 
             color: '#3D1A8E',
-            description: 'Meet x and y! Learn how variables work through interactive puzzles and hidden messages.'
+            description: 'Basics: Why Algebra, Variables and Constant, Operations on Variables | Foundational: Algebraic Expressions, Operations (Multiplications), Factorization'
         },
         { 
             id: 2, 
-            day: 'Day 2', 
-            title: 'The Great Balance', 
+            day: '03 June', 
+            title: 'Equations & Like Terms', 
             icon: <MdBalance size={32} />, 
             color: '#F5A623',
-            description: 'The secret art of balancing equations. Keep both sides equal or the tower falls!'
+            description: 'Basics: Equations and Inequations, Like and Unlike Terms, Addition and Subtraction of Expressions | Foundational: Division, Equations and Inequations, Factorization'
         },
         { 
             id: 3, 
-            day: 'Day 3', 
-            title: 'Linear Legends', 
+            day: '04 June', 
+            title: 'Polynomial Operations', 
             icon: <BiLineChart size={32} />, 
             color: '#E63329',
-            description: 'Master linear equations and use them to solve real-world mysteries in the Legend City.'
+            description: 'Basics: Monomial to Polynomial, Degree, Operations | Foundational: Zeros of a Polynomial, Solving Quadratic Equation'
         },
         { 
             id: 4, 
-            day: 'Day 4', 
-            title: 'Polynomial Park', 
+            day: '05 June', 
+            title: 'Applications & AI', 
             icon: <TbMathFunction size={32} />, 
             color: '#22C55E',
-            description: 'Explore the park of powers! Learn how to combine expressions like building blocks.'
+            description: 'Basics: Learning by Doing, Applications, Algebra in AI | Foundational: Solution of Equations in Two Variables, Applications'
         },
         { 
             id: 5, 
-            day: 'Day 5', 
-            title: 'Algebra Master', 
+            day: '06 June', 
+            title: 'Test & Interaction', 
             icon: <FaTrophy size={32} />, 
             color: '#D4880A',
-            description: 'The final boss! Show your skills in the Grand Algebra Quest and earn your certificate.'
+            description: 'Basics & Foundational: Test and Discussion with Parents (Optional)'
         }
     ];
 

@@ -13,7 +13,7 @@ const Footer = () => {
                     <div className={styles.logo}>
                         <img src={logo} alt="EduMEasy Logo" className={styles.logoImg} />
                     </div>
-                    <p className={styles.tagline}>Making Algebra as fun as your favorite video game.</p>
+                    <p className={styles.tagline}><strong>EduMEasy Private Limited</strong><br/>Learning Math By Doing Math.</p>
                 </div>
 
                 <div className={styles.column}>
@@ -43,7 +43,7 @@ const Footer = () => {
             </div>
             <div className={styles.bottomBar}>
                 <div className="container">
-                    <p>© 2026 EduMEasy. All Rights Reserved. Built with ❤️ for Math Legends.</p>
+                    <p>© 2026 EduMEasy Private Limited. All Rights Reserved. Built with ❤️ for Math Legends.</p>
                 </div>
             </div>
         </footer>
