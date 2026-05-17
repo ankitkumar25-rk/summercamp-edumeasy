@@ -1,3 +1,5 @@
+/* CHANGED: Overhauled HeroSection module styles with styled badges, speech bubble, keyframe effects, and fully responsive layouts. */
+
 .hero {
     padding: 80px 0;
     overflow: hidden;
@@ -132,6 +134,61 @@
     font-size: 1.2rem;
 }
 
+/* Playful floating elements styles */
+.badgeFloating {
+    position: absolute;
+    width: 44px;
+    height: 44px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: white;
+    border: 3px solid var(--primary);
+    z-index: 10;
+}
+
+.badgeSum {
+    background-color: var(--accent);
+    box-shadow: 0 4px 0 var(--accent-dark);
+    top: 20px;
+    right: -30px;
+    animation: spin 20s linear infinite;
+}
+
+.badgePi {
+    background-color: var(--primary);
+    box-shadow: 0 4px 0 var(--primary-dark);
+    bottom: -15px;
+    left: -35px;
+    animation: float 3s ease-in-out infinite;
+}
+
+.badgeFunc {
+    background-color: var(--success);
+    box-shadow: 0 4px 0 var(--success-dark);
+    top: -25px;
+    left: -25px;
+    animation: wiggle 2s ease-in-out infinite;
+}
+
+.speechBubble {
+    position: absolute;
+    top: -70px;
+    left: 80px;
+    background-color: white;
+    border: 3px solid var(--primary);
+    border-radius: 18px 18px 18px 4px;
+    padding: 8px 16px;
+    font-family: var(--font-display);
+    color: var(--primary);
+    display: flex;
+    align-items: center;
+    box-shadow: 4px 4px 0 rgba(61, 26, 142, 0.1);
+    z-index: 12;
+    white-space: nowrap;
+}
+
 .videoContainer {
     border-radius: var(--radius);
     overflow: hidden;
@@ -139,14 +196,15 @@
     box-shadow: 0 8px 0 var(--primary);
 }
 
-@media (max-width: 992px) {
+/* Responsive Overrides */
+@media (max-width: 1024px) {
     .hero {
-        padding: 40px 0;
+        padding: 50px 0;
     }
     .grid {
         grid-template-columns: 1fr;
         text-align: center;
-        gap: 40px;
+        gap: 50px;
     }
     .content {
         order: 2;
@@ -159,45 +217,82 @@
         width: 100%;
     }
     .title {
-        font-size: 2.8rem;
+        font-size: 3.2rem;
     }
     .subtitle {
-        font-size: 1.1rem;
+        font-size: 1.2rem;
         margin-bottom: 30px;
     }
     .actions {
-        flex-direction: column;
         width: 100%;
-        max-width: 300px;
+        max-width: 400px;
+        justify-content: center;
         gap: 15px;
     }
     .mainCircle {
         width: 100%;
-        max-width: 400px;
-        height: 280px;
+        max-width: 440px;
+        height: 340px;
         margin: 0 auto;
     }
+    .floatIcon {
+        right: -10px;
+        top: -30px;
+        transform: scale(0.85);
+    }
     .xpCard {
-        left: 0;
-        bottom: -20px;
-        transform: scale(0.9);
+        left: -20px;
+        bottom: -10px;
+        transform: scale(0.95);
+    }
+    .speechBubble {
+        left: 40px;
+        top: -65px;
+    }
+}
+
+@media (max-width: 768px) {
+    .title {
+        font-size: 2.6rem;
+    }
+    .actions {
+        flex-direction: column;
+        align-items: stretch;
+        max-width: 280px;
+        margin: 0 auto;
+    }
+    .mainCircle {
+        max-width: 280px !important;
+        height: 240px !important;
+        box-shadow: 8px 8px 0 var(--primary) !important;
     }
     .floatIcon {
-        right: 0;
-        top: -30px;
-        transform: scale(0.8);
+        display: none !important;
+    }
+    .xpCard {
+        display: none !important;
+    }
+    /* Position the remaining 1 badge nicely on mobile */
+    .badgeFunc {
+        top: -10px;
+        left: 10px;
+        transform: scale(0.85);
     }
 }
 
 @media (max-width: 480px) {
-    .title {
-        font-size: 2.2rem;
+    .hero {
+        padding: 30px 0;
     }
-    .mainCircle {
-        height: 220px;
+    .title {
+        font-size: 2.1rem;
     }
     .badge {
-        font-size: 0.8rem;
-        padding: 8px 16px;
+        font-size: 0.78rem;
+        padding: 8px 14px;
+        margin-bottom: 20px;
+    }
+    .subtitle {
+        font-size: 1rem;
     }
 }

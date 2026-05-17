@@ -1,6 +1,9 @@
+/* CHANGED: Overhauled FeatureCards module styles to include sticker badges, hover offsets, and multi-column grid breakpoint layouts. */
+
 .section {
     padding: 80px 0;
-    background-color: var(--bg);
+    position: relative;
+    z-index: 1;
 }
 
 .grid {
@@ -17,6 +20,26 @@
     text-align: center;
     box-shadow: 0 10px 0 var(--primary-dark);
     transition: var(--transition);
+    position: relative; /* Essential for absolute positioning of corner badges */
+}
+
+/* Sticker badge styling */
+.badgeSticker {
+    position: absolute;
+    top: -12px;
+    right: 16px;
+    transform: rotate(-12deg);
+    color: white;
+    font-family: var(--font-display);
+    font-size: 0.68rem;
+    padding: 6px 12px;
+    border-radius: 20px;
+    box-shadow: 0 3px 0 rgba(0, 0, 0, 0.2);
+    display: flex;
+    align-items: center;
+    z-index: 10;
+    pointer-events: none;
+    border: 2px solid var(--primary);
 }
 
 .iconWrapper {
@@ -46,10 +69,44 @@
     line-height: 1.6;
 }
 
-@media (max-width: 992px) {
+/* Tablet & Mobile Overrides */
+@media (max-width: 1024px) {
+    .section {
+        padding: 60px 0;
+    }
+    .grid {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 30px;
+    }
+    .card {
+        padding: 40px 30px;
+    }
+}
+
+@media (max-width: 768px) {
     .grid {
         grid-template-columns: 1fr;
-        max-width: 500px;
+        max-width: 420px;
         margin: 0 auto;
+        gap: 35px;
+    }
+    .card {
+        padding: 35px 25px;
+    }
+    .title {
+        font-size: 1.6rem;
+    }
+    .desc {
+        font-size: 1rem;
+    }
+}
+
+@media (max-width: 480px) {
+    .section {
+        padding: 40px 0;
+    }
+    .grid {
+        max-width: 320px;
+        gap: 30px;
     }
 }

@@ -106,7 +106,9 @@ const VerifyEmail = () => {
     };
 
     const inputStyle = {
-        width: '50px', height: '60px', fontSize: '1.5rem',
+        width: 'clamp(32px, 8vw, 50px)', 
+        height: 'clamp(42px, 10vw, 60px)', 
+        fontSize: 'clamp(1.1rem, 4vw, 1.5rem)',
         textAlign: 'center', border: '2px solid var(--primary)',
         borderRadius: '12px', fontWeight: 'bold', fontFamily: 'var(--font-display)',
         outline: 'none', background: 'var(--bg)', color: 'var(--text-dark)'
@@ -117,11 +119,7 @@ const VerifyEmail = () => {
             <Navbar />
             
             <div className="container" style={{ padding: '80px 20px', display: 'flex', justifyContent: 'center', minHeight: '80vh', alignItems: 'center' }}>
-                <div style={{
-                    background: 'var(--card)', padding: '50px', borderRadius: 'var(--radius-lg)',
-                    border: 'var(--border-fun)', boxShadow: 'var(--shadow-primary)',
-                    width: '100%', maxWidth: '500px', textAlign: 'center'
-                }}>
+                <div className="authCard" style={{ textAlign: 'center' }}>
                     <h2 style={{ marginBottom: '10px', color: 'var(--primary)' }}>Verify Your Email</h2>
                     <p style={{ marginBottom: '30px', color: 'var(--text-muted)' }}>
                         Enter the 6-digit OTP sent to <strong style={{color: 'var(--text-dark)'}}>{email}</strong>

@@ -133,7 +133,7 @@
 
 .scheduleGrid {
     display: grid;
-    grid-template-columns: repeat(5, 1fr);
+    grid-template-columns: repeat(3, 1fr);
     gap: 20px;
 }
 
@@ -305,17 +305,18 @@
         font-size: 2.5rem;
     }
     .lbRow {
-        padding: 15px;
+        padding: 8px 12px !important;
         gap: 10px;
+        font-size: 0.85rem !important;
     }
     .lbRank {
         width: 30px;
-        font-size: 1.1rem;
+        font-size: 0.85rem !important;
     }
     .lbName {
-        font-size: 1rem;
+        font-size: 0.85rem !important;
     }
     .lbXp {
-        font-size: 1rem;
+        font-size: 0.85rem !important;
     }
 }

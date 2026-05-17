@@ -70,11 +70,7 @@ const Login = () => {
             <Navbar />
             
             <div className="container" style={{ padding: '60px 20px', display: 'flex', justifyContent: 'center', minHeight: '80vh', alignItems: 'center' }}>
-                <div style={{
-                    background: 'var(--card)', padding: '40px', borderRadius: 'var(--radius-lg)',
-                    border: 'var(--border-fun)', boxShadow: 'var(--shadow-primary)',
-                    width: '100%', maxWidth: '450px'
-                }}>
+                <div className="authCard">
                     <h2 style={{ textAlign: 'center', marginBottom: '10px', color: 'var(--primary)' }}>Welcome Back!</h2>
                     <p style={{ textAlign: 'center', marginBottom: '30px', color: 'var(--text-muted)' }}>
                         Log in to continue your adventure.
@@ -118,7 +114,7 @@ const Login = () => {
                             {isSubmitting ? 'Logging In...' : 'Log In'}
                         </Button>
                         
-                        <div style={{ display: 'flex', justifyContent: 'space-between', marginTop: '10px', fontSize: '0.9rem' }}>
+                        <div className="loginFooterLinks">
                             <Link to="/forgot-password" style={{ color: 'var(--text-muted)', textDecoration: 'underline' }}>Forgot Password?</Link>
                             <div>
                                 Don't have an account? <Link to="/register" style={{ color: 'var(--primary)', fontWeight: 'bold', textDecoration: 'underline' }}>Register</Link>

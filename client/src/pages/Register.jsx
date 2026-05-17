@@ -250,17 +250,13 @@ const Register = () => {
             <Navbar />
             
             <div className="container" style={{ padding: '60px 20px', display: 'flex', justifyContent: 'center' }}>
-                <div style={{
-                    background: 'var(--card)', padding: '40px', borderRadius: 'var(--radius-lg)',
-                    border: 'var(--border-fun)', boxShadow: 'var(--shadow-primary)',
-                    width: '100%', maxWidth: '800px'
-                }}>
+                <div className="authCard wide">
                     <h2 style={{ textAlign: 'center', marginBottom: '10px', color: 'var(--primary)' }}>Create Your Account</h2>
                     <p style={{ textAlign: 'center', marginBottom: '30px', color: 'var(--text-muted)' }}>
                         Join the Algebra Summer Camp Adventure!
                     </p>
                     
-                    <form onSubmit={handleSubmit} style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '20px' }}>
+                    <form onSubmit={handleSubmit} className="responsiveFormGrid">
                         
                         <div style={{ gridColumn: '1 / -1' }}>
                             <label style={{ fontWeight: 'bold', display: 'block', marginBottom: '8px' }}>FULL NAME *</label>

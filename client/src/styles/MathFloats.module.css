@@ -1,51 +1,81 @@
+/* CHANGED: Refactored CSS modules for MathFloats to support custom dynamic colored borders and shadows, plus responsive styling rules. */
+
 .section {
-    padding: 60px 0;
+    padding: 40px 0;
     overflow: hidden;
 }
 
 .container {
     display: flex;
     justify-content: center;
+    align-items: center;
     flex-wrap: wrap;
-    gap: 30px;
+    gap: 24px;
 }
 
 .chip {
-    padding: 15px 30px;
+    padding: 12px 28px;
     border-radius: var(--radius-pill);
-    border: 3px solid var(--primary);
-    box-shadow: 0 6px 0 var(--primary-dark);
+    border: 2px solid;
     cursor: default;
     transition: var(--transition);
 }
 
 .chip:hover {
-    transform: scale(1.1) rotate(3deg);
+    transform: scale(1.08) rotate(2deg);
 }
 
 .inner {
     display: flex;
     align-items: center;
-    gap: 12px;
+    gap: 10px;
 }
 
 .icon {
-    font-size: 1.5rem;
     display: flex;
     align-items: center;
+    justify-content: center;
 }
 
 .text {
     font-family: var(--font-display);
-    font-size: 1.2rem;
-    color: var(--text-dark);
+    font-size: 1.1rem;
+    font-weight: normal;
 }
 
-@media (max-width: 600px) {
+/* Tablet & Mobile Overrides */
+@media (max-width: 1024px) {
+    .section {
+        padding: 30px 0;
+    }
     .chip {
-        padding: 10px 20px;
+        padding: 10px 22px;
     }
     .text {
         font-size: 1rem;
+    }
+}
+
+@media (max-width: 768px) {
+    .container {
+        gap: 16px;
+    }
+    .chip {
+        padding: 8px 18px;
+    }
+    .text {
+        font-size: 0.9rem;
+    }
+}
+
+@media (max-width: 480px) {
+    .container {
+        gap: 12px;
+    }
+    .chip {
+        padding: 6px 14px;
+    }
+    .text {
+        font-size: 0.85rem;
     }
 }

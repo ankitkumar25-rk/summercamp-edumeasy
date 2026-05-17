@@ -9,6 +9,7 @@ import { ToastProvider } from './hooks/useToast';
 // Components
 import ProtectedRoute from './components/ProtectedRoute';
 import Toast from './components/Toast';
+import MathBackground from './components/MathBackground';
 
 // Pages
 import Landing from './pages/Landing';
@@ -24,6 +25,7 @@ function App() {
     <AuthProvider>
       <ToastProvider>
         <Router>
+          <MathBackground />
           <Toast />
           <AnimatePresence mode="wait">
             <Routes>

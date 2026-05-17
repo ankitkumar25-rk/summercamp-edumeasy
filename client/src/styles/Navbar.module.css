@@ -1,3 +1,5 @@
+/* CHANGED: Completely overhauled Navbar module styles with CSS-transform hamburger, slide-out drawer, backdrop, and responsive rules. */
+
 .navbar {
     background-color: var(--card);
     border-bottom: var(--border-fun);
@@ -38,6 +40,7 @@
     padding: 2px;
     border: 3px solid var(--primary);
     box-shadow: 4px 4px 0 var(--primary);
+    transition: var(--transition);
 }
 
 .desktopNav {
@@ -61,6 +64,11 @@
     display: flex;
     align-items: center;
     gap: 20px;
+}
+
+.desktopOnlyButtons {
+    display: flex;
+    gap: 10px;
 }
 
 .userMenu {
@@ -114,6 +122,7 @@
     display: flex;
     flex-direction: column;
     gap: 5px;
+    z-index: 10;
 }
 
 .dropdownItem {
@@ -131,47 +140,130 @@
     color: var(--primary);
 }
 
+/* 3 Spans Hamburger style */
 .mobileToggle {
     display: none;
+    flex-direction: column;
+    justify-content: space-between;
+    width: 40px;
+    height: 32px;
+    background: transparent;
+    border: none;
+    cursor: pointer;
+    padding: 6px;
+    z-index: 2200;
 }
 
-.hamburger {
-    width: 30px;
-    height: 4px;
-    background-color: var(--primary);
-    position: relative;
-    border-radius: 2px;
-}
-
-.hamburger::before, .hamburger::after {
-    content: '';
-    position: absolute;
+.mobileToggle span {
+    display: block;
     width: 100%;
-    height: 100%;
+    height: 3px;
     background-color: var(--primary);
-    left: 0;
-    border-radius: 2px;
+    border-radius: 9px;
+    transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
 }
 
-.hamburger::before { top: -10px; }
-.hamburger::after { bottom: -10px; }
+.mobileToggleActive span:nth-child(1) {
+    transform: translateY(7px) rotate(45deg);
+}
 
-@media (max-width: 992px) {
+.mobileToggleActive span:nth-child(2) {
+    opacity: 0;
+}
+
+.mobileToggleActive span:nth-child(3) {
+    transform: translateY(-7px) rotate(-45deg);
+}
+
+/* Slide-out Drawer */
+.mobileMenu {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 80vw;
+    max-width: 300px;
+    height: 100vh;
+    background-color: var(--card);
+    display: flex;
+    flex-direction: column;
+    padding: 30px 20px;
+    gap: 20px;
+    z-index: 2100;
+    overflow-y: auto;
+    border-right: var(--border-fun);
+    transform: translateX(-100%);
+    transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.mobileMenuOpen {
+    transform: translateX(0);
+}
+
+.backdrop {
+    position: fixed;
+    inset: 0;
+    background-color: rgba(0, 0, 0, 0.5);
+    z-index: 2000;
+}
+
+.drawerHeader {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-bottom: 2px dashed rgba(61, 26, 142, 0.1);
+    padding-bottom: 16px;
+    margin-bottom: 10px;
+}
+
+.closeBtn {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--primary);
+    cursor: pointer;
+    transition: var(--transition);
+}
+
+.closeBtn:hover {
+    transform: scale(1.1) rotate(90deg);
+}
+
+.mobileLinks {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+}
+
+.mobileNavLink {
+    font-size: 1.2rem;
+    font-family: var(--font-display);
+    padding: 12px 20px;
+    text-align: left;
+    border: 3px solid var(--primary);
+    border-radius: var(--radius);
+    background: white;
+    box-shadow: 0 4px 0 var(--primary);
+    transition: var(--transition);
+}
+
+.mobileNavLink:active {
+    transform: translateY(4px);
+    box-shadow: 0 0px 0 var(--primary);
+}
+
+/* Tablet & Mobile Overrides */
+@media (max-width: 1024px) {
     .navbar {
         height: 75px;
     }
     .desktopNav {
         display: none;
     }
+    .desktopOnlyButtons {
+        display: none;
+    }
     .mobileToggle {
         display: flex;
-        align-items: center;
-        justify-content: center;
-        width: 45px;
-        height: 45px;
-        border-radius: 12px;
-        border: 2px solid var(--primary);
-        background: white;
     }
     .logoImg {
         height: 55px;
@@ -180,43 +272,15 @@
         font-size: 1.4rem;
     }
     .authSection {
-        gap: 10px;
+        gap: 12px;
     }
 }
 
-.mobileMenu {
-    position: fixed;
-    top: 75px;
-    left: 0;
-    width: 100%;
-    height: calc(100vh - 75px);
-    background-color: var(--card);
-    display: flex;
-    flex-direction: column;
-    padding: 40px 20px;
-    gap: 20px;
-    z-index: 2000;
-    overflow-y: auto;
-    animation: slideIn 0.3s ease-out;
-}
-
-@keyframes slideIn {
-    from { transform: translateY(-10px); opacity: 0; }
-    to { transform: translateY(0); opacity: 1; }
-}
-
-.mobileNavLink {
-    font-size: 1.8rem;
-    font-family: var(--font-display);
-    padding: 20px;
-    text-align: center;
-    border: 3px solid var(--primary);
-    border-radius: var(--radius);
-    background: white;
-    box-shadow: 0 6px 0 var(--primary);
-}
-
-.mobileNavLink:active {
-    transform: translateY(4px);
-    box-shadow: 0 2px 0 var(--primary);
+@media (max-width: 768px) {
+    .logoImg {
+        max-height: 36px !important;
+        height: auto !important;
+        border: 2px solid var(--primary) !important;
+        box-shadow: 2px 2px 0 var(--primary) !important;
+    }
 }

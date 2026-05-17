@@ -85,16 +85,17 @@
     opacity: 0.6;
 }
 
-@media (max-width: 992px) {
+@media (max-width: 1024px) {
     .grid {
         grid-template-columns: 1fr 1fr;
     }
 }
 
-@media (max-width: 600px) {
+@media (max-width: 768px) {
     .grid {
         grid-template-columns: 1fr;
         text-align: center;
+        gap: 30px;
     }
     .logo {
         justify-content: center;

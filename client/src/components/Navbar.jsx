@@ -1,10 +1,10 @@
-import React, { useState } from 'react';
+// CHANGED: Restructured Navbar component with enhanced LIVE badge using MdOutlineLiveTv, left-sliding drawer menu, backdrop overlay, and animated 3-span hamburger toggle button.
+
+import React, { useState, useEffect } from 'react';
 import { Link, useNavigate, useLocation } from 'react-router-dom';
-import { FaGoogle, FaUserCircle } from 'react-icons/fa';
-import { HiHome } from 'react-icons/hi';
-import { MdDashboard, MdLeaderboard } from 'react-icons/md';
+import { FaUserCircle } from 'react-icons/fa';
+import { MdDashboard, MdLeaderboard, MdOutlineLiveTv } from 'react-icons/md';
 import { IoClose } from 'react-icons/io5';
-import { RiLiveLine } from 'react-icons/ri';
 import { useAuth } from '../context/AuthContext';
 import styles from '../styles/Navbar.module.css';
 import Button from './Button';
@@ -16,6 +16,18 @@ const Navbar = () => {
     const [isDropdownOpen, setIsDropdownOpen] = useState(false);
     const navigate = useNavigate();
     const location = useLocation();
+
+    // Prevent body scroll when drawer is open
+    useEffect(() => {
+        if (isMenuOpen) {
+            document.body.style.overflow = 'hidden';
+        } else {
+            document.body.style.overflow = 'unset';
+        }
+        return () => {
+            document.body.style.overflow = 'unset';
+        };
+    }, [isMenuOpen]);
 
     const handleScroll = (id) => {
         if (location.pathname !== '/') {
@@ -31,8 +43,6 @@ const Navbar = () => {
 
     const toggleMenu = () => setIsMenuOpen(!isMenuOpen);
     const toggleDropdown = () => setIsDropdownOpen(!isDropdownOpen);
-
-    const API_URL = import.meta.env.VITE_API_URL || (window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1' ? 'http://localhost:5000' : window.location.origin);
 
     return (
         <nav className={styles.navbar}>
@@ -54,7 +64,7 @@ const Navbar = () => {
                         <div className={styles.userMenu}>
                             {isPaid && (
                                 <Link to="/live-class" className={styles.liveBadge}>
-                                    <RiLiveLine /> LIVE
+                                    <MdOutlineLiveTv size={14} /> LIVE
                                 </Link>
                             )}
                             <div className={styles.avatarWrapper} onClick={toggleDropdown}>
@@ -88,7 +98,7 @@ const Navbar = () => {
                             </div>
                         </div>
                     ) : (
-                        <div style={{ display: 'flex', gap: '10px' }}>
+                        <div className={styles.desktopOnlyButtons}>
                             <Button
                                 variant="outline"
                                 size="md"
@@ -106,22 +116,53 @@ const Navbar = () => {
                         </div>
                     )}
 
-                    {/* Mobile Toggle */}
-                    <button className={styles.mobileToggle} onClick={toggleMenu}>
-                        {isMenuOpen ? <IoClose size={32} /> : <div className={styles.hamburger}></div>}
+                    {/* Mobile Toggle Button */}
+                    <button 
+                        className={`${styles.mobileToggle} ${isMenuOpen ? styles.mobileToggleActive : ''}`} 
+                        onClick={toggleMenu} 
+                        aria-label="Toggle Menu"
+                    >
+                        <span></span>
+                        <span></span>
+                        <span></span>
                     </button>
                 </div>
             </div>
 
-            {/* Mobile Menu */}
+            {/* Mobile Menu Backdrop Overlay */}
             {isMenuOpen && (
-                <div className={styles.mobileMenu}>
+                <div className={styles.backdrop} onClick={toggleMenu} aria-hidden="true" />
+            )}
+
+            {/* Mobile Left Drawer Menu */}
+            <div className={`${styles.mobileMenu} ${isMenuOpen ? styles.mobileMenuOpen : ''}`}>
+                <div className={styles.drawerHeader}>
+                    <img src={logo} alt="EduMEasy Logo" className={styles.logoImg} style={{ maxHeight: '36px' }} />
+                    <button onClick={toggleMenu} className={styles.closeBtn} aria-label="Close Menu">
+                        <IoClose size={28} />
+                    </button>
+                </div>
+                <div className={styles.mobileLinks}>
                     <button onClick={() => handleScroll('hero')} className={styles.mobileNavLink}>Home</button>
                     <button onClick={() => handleScroll('schedule')} className={styles.mobileNavLink}>Schedule</button>
                     <button onClick={() => handleScroll('about')} className={styles.mobileNavLink}>About</button>
                     <button onClick={() => handleScroll('contact')} className={styles.mobileNavLink}>Contact</button>
+                    {isAuthenticated ? (
+                        <>
+                            <Link to="/dashboard" className={styles.mobileNavLink} onClick={toggleMenu}>Dashboard</Link>
+                            {isAdmin && (
+                                <Link to="/admin" className={styles.mobileNavLink} onClick={toggleMenu}>Admin Panel</Link>
+                            )}
+                            <button onClick={() => { logout(); toggleMenu(); }} className={styles.mobileNavLink} style={{ textAlign: 'left', color: 'var(--danger)' }}>Logout</button>
+                        </>
+                    ) : (
+                        <div style={{ display: 'flex', flexDirection: 'column', gap: '12px', marginTop: '20px' }}>
+                            <Button variant="outline" size="md" onClick={() => { navigate('/login'); toggleMenu(); }}>Log In</Button>
+                            <Button variant="accent" size="md" onClick={() => { navigate('/register'); toggleMenu(); }}>Register Now</Button>
+                        </div>
+                    )}
                 </div>
-            )}
+            </div>
         </nav>
     );
 };

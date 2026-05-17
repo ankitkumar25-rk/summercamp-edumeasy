@@ -104,23 +104,37 @@
     font-weight: 600;
 }
 
-@media (max-width: 1100px) {
-    .grid {
-        grid-template-columns: repeat(3, 1fr);
-    }
-}
-
 @media (max-width: 768px) {
     .grid {
-        grid-template-columns: repeat(2, 1fr);
+        display: flex;
+        overflow-x: auto;
+        padding: 5px 5px 15px;
+        gap: 15px;
+        -webkit-overflow-scrolling: touch;
+        scrollbar-width: none;
+    }
+    .grid::-webkit-scrollbar {
+        display: none;
+    }
+    .dayCard {
+        flex: 0 0 auto;
+        min-width: 120px;
+        padding: 18px 12px;
+    }
+    .dayTitle {
+        font-size: 0.95rem;
     }
     .sectionTitle {
         font-size: 2.2rem;
+        margin-bottom: 40px;
     }
-}
-
-@media (max-width: 480px) {
-    .grid {
-        grid-template-columns: 1fr;
+    .detailContent {
+        padding: 25px;
+    }
+    .detailTitle {
+        font-size: 1.5rem;
+    }
+    .detailDesc {
+        font-size: 1.1rem;
     }
 }

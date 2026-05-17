@@ -18,6 +18,7 @@ import CTABanner from '../components/CTABanner';
 import Footer from '../components/Footer';
 import Modal from '../components/Modal';
 import Button from '../components/Button';
+import WaveDivider from '../components/WaveDivider';
 
 const Landing = () => {
     const { isAuthenticated, isPaid } = useAuth();
@@ -79,9 +80,17 @@ const Landing = () => {
             >
                 <HeroSection onEnroll={handleEnrollClick} />
                 <MathFloats />
+                
+                <WaveDivider />
                 <DaySchedule />
+                
+                <WaveDivider flip={true} />
                 <FeatureCards />
+                
+                <WaveDivider />
                 <Testimonials />
+                
+                <WaveDivider flip={true} />
                 <PricingCard />
                 <CTABanner onEnroll={handleEnrollClick} />
                 <Footer />

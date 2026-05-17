@@ -57,8 +57,11 @@ html {
 body {
   font-family: var(--font-body);
   background-color: var(--bg);
-  background-image: radial-gradient(#E8E0D0 1.5px, transparent 1.5px);
-  background-size: 24px 24px;
+  background-image: 
+    radial-gradient(#D4C9B0 1px, transparent 1px),
+    linear-gradient(rgba(61,26,142,0.03) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(61,26,142,0.03) 1px, transparent 1px);
+  background-size: 28px 28px, 56px 56px, 56px 56px;
   color: var(--text-dark);
   overflow-x: hidden;
   line-height: 1.5;
@@ -113,6 +116,10 @@ input, textarea {
   75% { transform: translateX(5px); }
 }
 
+@keyframes spin {
+  to { transform: rotate(360deg); }
+}
+
 .animate-wiggle { animation: wiggle 2s ease-in-out infinite; }
 .animate-float { animation: float 3s ease-in-out infinite; }
 
@@ -133,4 +140,54 @@ input, textarea {
 
 ::-webkit-scrollbar-thumb:hover {
   background: var(--primary-dark);
+}
+
+/* Responsive Auth Cards & Forms */
+.authCard {
+  background: var(--card);
+  padding: 40px;
+  border-radius: var(--radius-lg);
+  border: var(--border-fun);
+  box-shadow: var(--shadow-primary);
+  width: 100%;
+  max-width: 450px;
+  box-sizing: border-box;
+}
+
+.authCard.wide {
+  max-width: 800px;
+}
+
+.responsiveFormGrid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 20px;
+}
+
+.loginFooterLinks {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 12px;
+  margin-top: 15px;
+  font-size: 0.9rem;
+}
+
+@media (max-width: 768px) {
+  .authCard {
+    padding: 25px 20px !important;
+  }
+  .responsiveFormGrid {
+    grid-template-columns: 1fr !important;
+    gap: 15px !important;
+  }
+  .responsiveFormGrid > div {
+    grid-column: 1 / -1 !important;
+  }
+  .loginFooterLinks {
+    flex-direction: column !important;
+    text-align: center !important;
+    gap: 10px !important;
+  }
 }

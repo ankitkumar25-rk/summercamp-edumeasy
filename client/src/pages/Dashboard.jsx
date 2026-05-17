@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { useNavigate } from 'react-router-dom';
-import { FaTrophy, FaMedal, FaLock, FaExclamationTriangle } from 'react-icons/fa';
+import { FaTrophy, FaMedal, FaLock, FaExclamationTriangle, FaStar } from 'react-icons/fa';
 import { HiLightningBolt } from 'react-icons/hi';
 import { BsCheckCircleFill, BsLightningChargeFill } from 'react-icons/bs';
 import { RiLiveLine } from 'react-icons/ri';
@@ -81,7 +81,10 @@ const Dashboard = () => {
                     <h1 className={styles.welcome}>Welcome back, {user?.fullName?.split(' ')[0] || 'Student'}!</h1>
                     <div className={styles.levelCard}>
                         <div className={styles.levelInfo}>
-                            <span className={styles.levelName}>{currentLevel.name}</span>
+                            <span className={styles.levelName}>
+                                {currentLevel.name}
+                                <FaStar style={{ color: 'var(--accent)', animation: 'spin 3s linear infinite', marginLeft: 6 }} />
+                            </span>
                             <span className={styles.xpText}>{user?.xp || 0} XP</span>
                         </div>
                         <div className={styles.progressBar}>
