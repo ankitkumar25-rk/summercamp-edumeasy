@@ -29,9 +29,14 @@ const Login = () => {
 
         try {
             await api.post('/api/auth/login', { email, password });
+            const res = await api.get('/api/auth/me');
             await checkAuth(); // refresh user context
             showToast('success', 'Logged in successfully!');
-            navigate('/dashboard');
+            if (res.data.role === 'admin') {
+                navigate('/admin');
+            } else {
+                navigate('/dashboard');
+            }
         } catch (error) {
             if (error.response) {
                 const msg = error.response.data.message;

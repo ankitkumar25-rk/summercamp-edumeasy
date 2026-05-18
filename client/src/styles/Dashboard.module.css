@@ -84,20 +84,30 @@
     color: var(--text-muted);
 }
 
+/* Tabs */
 .tabs {
     display: flex;
     gap: 15px;
     margin-bottom: 30px;
+    flex-wrap: wrap;
 }
 
 .tab {
-    padding: 12px 30px;
-    border-radius: var(--radius-pill);
+    padding: 12px 25px;
+    border-radius: var(--radius-pill) !important;
     font-family: var(--font-display);
     font-size: 1.1rem;
     border: var(--border-fun);
-    background-color: var(--bg);
+    background-color: white;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
     transition: var(--transition);
+}
+
+.tab:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 0 var(--primary);
 }
 
 .tabActive {
@@ -107,6 +117,12 @@
     transform: translateY(-4px);
 }
 
+.tabActive:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 6px 0 var(--primary-dark);
+}
+
+/* Overview Section */
 .liveNowCard {
     background-color: var(--primary);
     border: var(--border-fun);
@@ -131,19 +147,82 @@
     animation: wiggle 1s infinite;
 }
 
-.scheduleGrid {
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
+.attendanceSummaryCard {
+    background-color: white;
+    border: var(--border-fun);
+    border-radius: var(--radius-lg);
+    padding: 35px;
+    box-shadow: 0 8px 0 var(--primary-dark);
+    margin-top: 30px;
+}
+
+.attHeader {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 30px;
     gap: 20px;
 }
 
-.dayCard {
-    background-color: white;
+.streakBadge, .pctBadge {
     border: var(--border-fun);
     border-radius: var(--radius);
-    padding: 25px;
+    padding: 20px 30px;
+    background-color: var(--bg);
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    box-shadow: 0 5px 0 var(--primary);
+}
+
+.fireIcon {
+    color: var(--danger);
+    animation: bounce 2s infinite ease-in-out;
+}
+
+.streakNum, .pctNum {
+    display: block;
+    font-size: 2rem;
+    font-weight: 900;
+    color: var(--primary);
+}
+
+.streakLbl, .pctLbl {
+    font-size: 0.9rem;
+    color: var(--text-muted);
+    font-weight: 700;
+}
+
+.subTitleText {
+    font-family: var(--font-display);
+    font-size: 1.5rem;
+    margin-bottom: 20px;
+    color: var(--primary);
+}
+
+.scheduleGrid {
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    gap: 15px;
+}
+
+.dayCard {
+    border: var(--border-fun);
+    border-radius: var(--radius);
+    padding: 20px 15px;
     text-align: center;
-    box-shadow: 0 8px 0 var(--primary-dark);
+    transition: var(--transition);
+}
+
+.attChecked {
+    background-color: #EDFAF3;
+    border-color: var(--success);
+    box-shadow: 0 6px 0 var(--success-dark);
+}
+
+.attMissed {
+    background-color: white;
+    border-color: var(--primary);
+    box-shadow: 0 6px 0 var(--primary-dark);
 }
 
 .dayNum {
@@ -156,7 +235,8 @@
 .dayTitle {
     font-size: 1.1rem;
     font-weight: 900;
-    margin-bottom: 20px;
+    margin-bottom: 15px;
+    min-height: 44px;
 }
 
 .completed {
@@ -166,6 +246,7 @@
     align-items: center;
     justify-content: center;
     gap: 5px;
+    font-size: 0.85rem;
 }
 
 .locked {
@@ -175,16 +256,495 @@
     align-items: center;
     justify-content: center;
     gap: 8px;
-    opacity: 0.5;
+    font-size: 0.85rem;
+    opacity: 0.6;
 }
 
-/* Leaderboard */
+/* Quizzes Section */
+.quizzesSection {
+    background-color: white;
+    border: var(--border-fun);
+    border-radius: var(--radius-lg);
+    padding: 40px;
+    box-shadow: 0 10px 0 var(--primary-dark);
+}
+
+.sectionHeader {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+    margin-bottom: 40px;
+}
+
+.secIcon {
+    font-size: 3rem;
+    color: var(--accent);
+}
+
+.emptyStateBox {
+    text-align: center;
+    padding: 60px 20px;
+    border: var(--border-fun);
+    border-radius: var(--radius);
+    background-color: var(--bg);
+    margin: 20px 0;
+}
+
+.emptyStateBox h3 {
+    font-size: 1.6rem;
+    margin-top: 15px;
+    margin-bottom: 10px;
+}
+
+.emptyStateBox p {
+    color: var(--text-muted);
+}
+
+.quizzesGrid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 25px;
+}
+
+.quizOptionCard {
+    background-color: white;
+    border: var(--border-fun);
+    border-radius: var(--radius);
+    padding: 30px;
+    box-shadow: 0 8px 0 var(--primary-dark);
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+.quizOptHeader {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 15px;
+}
+
+.quizOptMeta {
+    display: flex;
+    gap: 15px;
+    font-size: 0.85rem;
+    color: var(--text-muted);
+    font-weight: 700;
+}
+
+.quizClassPill {
+    background-color: var(--accent-light);
+    color: var(--accent-dark);
+    font-weight: 800;
+    font-size: 0.8rem;
+    padding: 4px 12px;
+    border-radius: var(--radius-pill);
+    border: 2px solid var(--accent);
+}
+
+.quizOptTitle {
+    font-size: 1.5rem;
+    font-family: var(--font-display);
+    color: var(--primary);
+    margin-bottom: 10px;
+}
+
+.quizOptDesc {
+    font-size: 0.95rem;
+    color: var(--text-muted);
+    margin-bottom: 25px;
+    line-height: 1.4;
+    flex: 1;
+}
+
+.submittedPillBox {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+}
+
+.completedBadge {
+    color: var(--success);
+    font-weight: 900;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+}
+
+.warningBadge {
+    color: var(--accent-dark);
+    font-weight: 900;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+}
+
+.w100 {
+    width: 100%;
+}
+
+/* Quiz Interface wrapper */
+.quizWrapper {
+    max-width: 800px;
+    margin: 80px auto;
+    background-color: white;
+    border: var(--border-fun);
+    border-radius: var(--radius-lg);
+    padding: 40px;
+    box-shadow: 0 12px 0 var(--primary-dark);
+}
+
+.quizHeader {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 30px;
+    border-bottom: 3px solid var(--bg);
+    padding-bottom: 20px;
+}
+
+.quizTitle {
+    font-size: 2rem;
+    color: var(--primary);
+    margin-bottom: 5px;
+}
+
+.quizBadge {
+    font-size: 0.9rem;
+    color: var(--text-muted);
+    font-weight: 700;
+}
+
+.quizTimerBox {
+    border: var(--border-fun);
+    border-radius: var(--radius);
+    padding: 10px 20px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    box-shadow: 0 4px 0 var(--primary);
+}
+
+.quizTimer {
+    font-size: 1.4rem;
+    font-weight: 900;
+    font-family: monospace;
+}
+
+.timerAlert {
+    color: var(--danger);
+    animation: flash 1s infinite alternate;
+}
+
+.quizProgressBarContainer {
+    margin-bottom: 30px;
+}
+
+.quizProgressText {
+    font-weight: 800;
+    font-size: 0.95rem;
+    margin-bottom: 8px;
+    color: var(--text-muted);
+}
+
+.quizProgressBar {
+    height: 12px;
+    background-color: var(--bg);
+    border-radius: 6px;
+    border: 2px solid var(--primary);
+    overflow: hidden;
+}
+
+.quizProgressBarFill {
+    height: 100%;
+    background-color: var(--accent);
+    transition: width 0.3s ease;
+}
+
+.quizCard {
+    border: var(--border-fun);
+    border-radius: var(--radius);
+    padding: 30px;
+    margin-bottom: 30px;
+    box-shadow: 0 6px 0 var(--bg);
+}
+
+.questionTopic {
+    font-size: 0.85rem;
+    font-weight: 800;
+    color: var(--text-muted);
+    margin-bottom: 15px;
+}
+
+.diff_easy { color: var(--success); font-weight: 900; }
+.diff_medium { color: var(--accent-dark); font-weight: 900; }
+.diff_hard { color: var(--danger); font-weight: 900; }
+
+.questionText {
+    font-size: 1.6rem;
+    font-family: var(--font-display);
+    color: var(--primary);
+    margin-bottom: 30px;
+    line-height: 1.3;
+}
+
+.optionsGrid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 15px;
+}
+
+.optionBtn {
+    background-color: white;
+    border: var(--border-fun);
+    border-radius: var(--radius);
+    padding: 20px 25px;
+    text-align: left;
+    font-size: 1.1rem;
+    font-weight: 800;
+    cursor: pointer;
+    transition: var(--transition);
+    display: flex;
+    align-items: center;
+    gap: 15px;
+}
+
+.optionBtn:hover {
+    background-color: var(--bg);
+    transform: translateX(4px);
+}
+
+.optionSelected {
+    background-color: var(--accent-light);
+    border-color: var(--accent-dark);
+    box-shadow: 0 4px 0 var(--accent);
+    transform: translateY(-2px);
+}
+
+.optionBox {
+    font-size: 1.4rem;
+    font-weight: 900;
+    color: var(--primary);
+}
+
+.integerInput {
+    width: 100%;
+    padding: 20px;
+    border: var(--border-fun);
+    border-radius: var(--radius);
+    font-size: 1.3rem;
+    font-weight: 800;
+    outline: none;
+    box-shadow: inset 0 4px 0 rgba(0,0,0,0.05);
+}
+
+.integerInput:focus {
+    border-color: var(--accent);
+}
+
+.quizNav {
+    display: flex;
+    justify-content: space-between;
+}
+
+/* Graded Review */
+.backBtn {
+    border: var(--border-fun);
+    border-radius: var(--radius-pill);
+    background-color: white;
+    padding: 10px 25px;
+    font-weight: 900;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    margin-bottom: 30px;
+}
+
+.backBtn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 0 var(--primary);
+}
+
+.resultSummaryCard {
+    background-color: white;
+    border: var(--border-fun);
+    border-radius: var(--radius-lg);
+    padding: 40px;
+    box-shadow: 0 10px 0 var(--primary-dark);
+    margin-bottom: 40px;
+}
+
+.resultTitleBox {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+    margin-bottom: 35px;
+}
+
+.goldAwardIcon {
+    color: var(--accent);
+    animation: bounce 2s infinite ease-in-out;
+}
+
+.resultsGrid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 15px;
+    margin-bottom: 40px;
+}
+
+.statPill {
+    background-color: var(--bg);
+    border: var(--border-fun);
+    border-radius: var(--radius);
+    padding: 20px;
+    text-align: center;
+    box-shadow: 0 4px 0 var(--primary);
+}
+
+.statLabel {
+    display: block;
+    font-size: 0.85rem;
+    font-weight: 800;
+    color: var(--text-muted);
+    margin-bottom: 8px;
+}
+
+.statVal {
+    display: block;
+    font-size: 1.6rem;
+    font-weight: 900;
+    color: var(--primary);
+}
+
+.topicsBreakdown h3 {
+    font-family: var(--font-display);
+    font-size: 1.4rem;
+    margin-bottom: 20px;
+}
+
+.topicsGrid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 20px;
+}
+
+.topicRow {
+    background-color: var(--bg);
+    border: 2px solid var(--primary);
+    border-radius: var(--radius);
+    padding: 15px 20px;
+}
+
+.topicInfo {
+    display: flex;
+    justify-content: space-between;
+    font-weight: 800;
+    font-size: 0.95rem;
+    margin-bottom: 8px;
+}
+
+.topicProgressBar {
+    height: 8px;
+    background-color: white;
+    border-radius: 4px;
+    overflow: hidden;
+    border: 1px solid var(--primary);
+}
+
+.topicProgressBarFill {
+    height: 100%;
+}
+
+.questionsReviewList {
+    background-color: white;
+    border: var(--border-fun);
+    border-radius: var(--radius-lg);
+    padding: 40px;
+    box-shadow: 0 10px 0 var(--primary-dark);
+}
+
+.reviewListTitle {
+    font-family: var(--font-display);
+    font-size: 1.8rem;
+    margin-bottom: 30px;
+}
+
+.reviewQuestionCard {
+    border: var(--border-fun);
+    border-radius: var(--radius);
+    padding: 30px;
+    margin-bottom: 25px;
+    box-shadow: 0 6px 0 var(--primary-dark);
+}
+
+.correctCard {
+    background-color: #EDFAF3;
+    border-color: var(--success);
+}
+
+.wrongCard {
+    background-color: #FDF2F2;
+    border-color: var(--danger);
+}
+
+.reviewCardHeader {
+    display: flex;
+    justify-content: space-between;
+    font-weight: 900;
+    margin-bottom: 15px;
+}
+
+.badgeCorrect {
+    color: var(--success);
+}
+
+.badgeWrong {
+    color: var(--danger);
+}
+
+.reviewQText {
+    font-size: 1.3rem;
+    font-weight: 800;
+    margin-bottom: 20px;
+}
+
+.optionsBlock {
+    background-color: white;
+    padding: 15px 20px;
+    border-radius: var(--radius);
+    border: 2px solid var(--primary);
+    margin-bottom: 15px;
+    font-weight: 700;
+}
+
+.optionsBlock p {
+    margin-bottom: 8px;
+}
+
+.qFooterStats {
+    display: flex;
+    justify-content: space-between;
+    font-size: 0.85rem;
+    font-weight: 800;
+    color: var(--text-muted);
+}
+
+/* Leaderboard tab */
 .leaderboard {
     background-color: white;
     border: var(--border-fun);
     border-radius: var(--radius-lg);
     padding: 40px;
     box-shadow: 0 10px 0 var(--primary-dark);
+}
+
+.lbLayoutGrid {
+    display: grid;
+    grid-template-columns: 2.2fr 1fr;
+    gap: 40px;
 }
 
 .lbHeader {
@@ -199,6 +759,39 @@
     color: var(--accent);
 }
 
+.filtersRow {
+    display: flex;
+    gap: 20px;
+    margin-bottom: 30px;
+    background-color: var(--bg);
+    padding: 20px;
+    border-radius: var(--radius);
+    border: 2px solid var(--primary);
+}
+
+.filterGroup {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+    flex: 1;
+}
+
+.filterGroup label {
+    font-weight: 900;
+    font-size: 0.85rem;
+    color: var(--primary);
+}
+
+.filterGroup select {
+    padding: 10px;
+    font-family: inherit;
+    font-weight: 700;
+    border: var(--border-fun);
+    border-radius: var(--radius);
+    outline: none;
+    cursor: pointer;
+}
+
 .lbTable {
     display: flex;
     flex-direction: column;
@@ -211,12 +804,15 @@
     border-radius: 16px;
     display: flex;
     align-items: center;
-    border: 2px solid transparent;
+    border: 2px solid var(--primary);
+    box-shadow: 0 4px 0 var(--primary);
 }
 
 .lbRowMe {
     background-color: rgba(61, 26, 142, 0.1);
     border-color: var(--primary);
+    border-width: 3px;
+    box-shadow: 0 5px 0 var(--primary);
 }
 
 .lbRank {
@@ -231,6 +827,15 @@
     flex: 1;
     font-weight: 800;
     font-size: 1.2rem;
+    display: flex;
+    flex-direction: column;
+}
+
+.lbPills {
+    font-size: 0.8rem;
+    color: var(--text-muted);
+    font-weight: 700;
+    margin-top: 4px;
 }
 
 .lbXp {
@@ -239,84 +844,200 @@
     font-size: 1.2rem;
 }
 
+.personalRankSection {
+    background-color: var(--bg);
+    border: var(--border-fun);
+    border-radius: var(--radius);
+    padding: 30px 20px;
+    height: fit-content;
+    box-shadow: 0 6px 0 var(--primary);
+}
+
+.secTitle {
+    font-family: var(--font-display);
+    font-size: 1.3rem;
+    margin-bottom: 20px;
+    text-align: center;
+    color: var(--primary);
+}
+
+.rankMetricCard {
+    background-color: white;
+    border: 2px solid var(--primary);
+    border-radius: var(--radius);
+    padding: 15px;
+    margin-bottom: 15px;
+    text-align: center;
+}
+
+.metricScope {
+    display: block;
+    font-size: 0.8rem;
+    font-weight: 800;
+    color: var(--text-muted);
+    margin-bottom: 5px;
+}
+
+.metricVal {
+    display: block;
+    font-size: 1.6rem;
+    font-weight: 900;
+    color: var(--primary);
+}
+
+.metricTot {
+    font-size: 1rem;
+    color: var(--text-muted);
+}
+
+.metricPct {
+    display: block;
+    font-size: 0.8rem;
+    font-weight: 800;
+    color: var(--accent-dark);
+    margin-top: 5px;
+}
+
+/* Certificate Tab */
+.certificateSection {
+    background-color: white;
+    border: var(--border-fun);
+    border-radius: var(--radius-lg);
+    padding: 40px;
+    box-shadow: 0 10px 0 var(--primary-dark);
+}
+
+.certLayoutGrid {
+    display: grid;
+    grid-template-columns: 1.2fr 1fr;
+    gap: 30px;
+}
+
+.criteriaCard {
+    border: var(--border-fun);
+    border-radius: var(--radius);
+    padding: 30px;
+    background-color: var(--bg);
+    box-shadow: 0 6px 0 var(--primary);
+}
+
+.criteriaCard h3 {
+    font-family: var(--font-display);
+    font-size: 1.4rem;
+    margin-bottom: 25px;
+}
+
+.checklistRow {
+    display: flex;
+    align-items: flex-start;
+    gap: 15px;
+    margin-bottom: 25px;
+}
+
+.checkInfo h4 {
+    font-size: 1.1rem;
+    font-weight: 900;
+    margin-bottom: 5px;
+}
+
+.checkInfo p {
+    font-size: 0.9rem;
+    color: var(--text-muted);
+    font-weight: 700;
+}
+
+.eligibilityBanner {
+    border: 2px solid;
+    border-radius: var(--radius);
+    padding: 15px;
+    text-align: center;
+    margin-top: 15px;
+}
+
+.certPreviewCard {
+    border: var(--border-fun);
+    border-radius: var(--radius);
+    padding: 40px;
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+.lockedCert {
+    background-color: white;
+    opacity: 0.6;
+}
+
+.unlockedCert {
+    background-color: #FFFDF5;
+    border-color: var(--accent);
+    box-shadow: 0 8px 0 var(--accent);
+}
+
+.certBadgeIcon {
+    color: var(--accent);
+    margin-bottom: 20px;
+}
+
+.certPreviewCard h3 {
+    font-family: var(--font-display);
+    font-size: 1.6rem;
+    margin-bottom: 10px;
+}
+
+.certPreviewCard p {
+    color: var(--text-muted);
+    font-weight: 700;
+    margin-bottom: 30px;
+}
+
+.bouncingBtn {
+    animation: bounce-micro 3s infinite ease-in-out;
+}
+
+/* Base keyframes */
+@keyframes flash {
+    0% { opacity: 1; }
+    100% { opacity: 0.4; }
+}
+
+@keyframes bounce-micro {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(-4px); }
+}
+
+/* Responsive grid overrides */
 @media (max-width: 992px) {
-    .main {
-        padding: 40px 15px 100px;
-    }
-    .header {
-        flex-direction: column;
-        text-align: center;
-        margin-bottom: 30px;
-        gap: 20px;
-    }
-    .welcome {
-        font-size: 2.2rem;
-    }
-    .levelCard {
-        max-width: 100%;
-        padding: 15px 20px;
-    }
     .scheduleGrid {
+        grid-template-columns: repeat(3, 1fr);
+    }
+    .attHeader {
+        flex-direction: column;
+    }
+    .quizzesGrid {
+        grid-template-columns: 1fr;
+    }
+    .lbLayoutGrid {
+        grid-template-columns: 1fr;
+    }
+    .certLayoutGrid {
+        grid-template-columns: 1fr;
+    }
+    .resultsGrid {
         grid-template-columns: repeat(2, 1fr);
-        gap: 15px;
     }
-    .liveNowCard {
-        flex-direction: column;
-        padding: 25px;
-        text-align: center;
-        gap: 20px;
-    }
-    .liveLeft {
-        flex-direction: column;
-        gap: 10px;
+    .topicsGrid {
+        grid-template-columns: 1fr;
     }
 }
 
 @media (max-width: 600px) {
     .scheduleGrid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+    .resultsGrid {
         grid-template-columns: 1fr;
-    }
-    .tabs {
-        overflow-x: auto;
-        padding: 5px 5px 15px;
-        width: 100%;
-        justify-content: flex-start;
-        -webkit-overflow-scrolling: touch;
-        scrollbar-width: none;
-    }
-    .tabs::-webkit-scrollbar {
-        display: none;
-    }
-    .tab {
-        white-space: nowrap;
-        padding: 10px 20px;
-        font-size: 0.9rem;
-        flex-shrink: 0;
-    }
-    .leaderboard {
-        padding: 20px;
-    }
-    .lbHeader {
-        flex-direction: column;
-        text-align: center;
-        gap: 10px;
-    }
-    .lbIcon {
-        font-size: 2.5rem;
-    }
-    .lbRow {
-        padding: 8px 12px !important;
-        gap: 10px;
-        font-size: 0.85rem !important;
-    }
-    .lbRank {
-        width: 30px;
-        font-size: 0.85rem !important;
-    }
-    .lbName {
-        font-size: 0.85rem !important;
-    }
-    .lbXp {
-        font-size: 0.85rem !important;
     }
 }

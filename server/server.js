@@ -48,6 +48,10 @@ app.use('/api/admin', require('./routes/admin'));
 app.use('/api/leaderboard', require('./routes/leaderboard'));
 app.use('/api/user', require('./routes/user'));
 app.use('/api/doubts', require('./routes/doubts'));
+app.use('/api/tests', require('./routes/tests'));
+app.use('/api/attendance', require('./routes/attendance'));
+app.use('/api/certificates', require('./routes/certificates'));
+app.use('/api/analytics', require('./routes/analytics'));
 
 const PORT = process.env.PORT || 5000;
 

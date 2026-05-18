@@ -8,28 +8,36 @@
 }
 
 .title {
-    font-size: 3rem;
+    font-size: 3.2rem;
     color: var(--primary);
     text-shadow: 3px 3px 0 var(--accent);
-    margin-bottom: 40px;
+    margin-bottom: 45px;
     text-align: center;
 }
 
+/* Tabs */
 .tabs {
     display: flex;
     justify-content: center;
-    gap: 20px;
+    gap: 15px;
     margin-bottom: 40px;
+    flex-wrap: wrap;
 }
 
 .tab {
-    padding: 12px 30px;
+    padding: 12px 25px;
     border-radius: var(--radius-pill);
     font-family: var(--font-display);
-    font-size: 1.1rem;
+    font-size: 1.05rem;
     border: var(--border-fun);
     background-color: white;
+    cursor: pointer;
     transition: var(--transition);
+}
+
+.tab:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 0 var(--primary);
 }
 
 .tabActive {
@@ -39,6 +47,12 @@
     transform: translateY(-4px);
 }
 
+.tabActive:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 6px 0 var(--accent-dark);
+}
+
+/* Content Container */
 .content {
     background-color: white;
     border: var(--border-fun);
@@ -47,6 +61,25 @@
     box-shadow: 0 12px 0 var(--primary-dark);
 }
 
+.secHeaderLine {
+    border-bottom: 3px solid var(--bg);
+    padding-bottom: 20px;
+    margin-bottom: 30px;
+}
+
+.secHeaderLine h2 {
+    font-family: var(--font-display);
+    font-size: 2rem;
+    color: var(--primary);
+    margin-bottom: 5px;
+}
+
+.secHeaderLine p {
+    color: var(--text-muted);
+    font-weight: 700;
+}
+
+/* Data Tables */
 .table {
     width: 100%;
     border-collapse: separate;
@@ -58,15 +91,24 @@
     padding: 15px 20px;
     font-family: var(--font-display);
     color: var(--text-muted);
+    font-size: 0.95rem;
 }
 
 .table td {
-    padding: 15px 20px;
+    padding: 18px 20px;
     background-color: var(--bg);
+    border-top: 2px solid var(--primary);
+    border-bottom: 2px solid var(--primary);
 }
 
-.table tr td:first-child { border-radius: 15px 0 0 15px; }
-.table tr td:last-child { border-radius: 0 15px 15px 0; }
+.table tr td:first-child { 
+    border-left: 2px solid var(--primary);
+    border-radius: 12px 0 0 12px; 
+}
+.table tr td:last-child { 
+    border-right: 2px solid var(--primary);
+    border-radius: 0 12px 12px 0; 
+}
 
 .userInfo {
     display: flex;
@@ -74,34 +116,138 @@
     gap: 15px;
 }
 
-.avatar {
-    width: 45px;
-    height: 45px;
-    border-radius: 50%;
-    border: 2px solid var(--primary);
+.avatarPlaceholder {
+    color: var(--primary);
 }
 
 .userName {
     font-weight: 800;
+    font-size: 1.1rem;
 }
 
 .userEmail {
     font-size: 0.85rem;
-    opacity: 0.6;
+    color: var(--text-muted);
+    font-weight: 600;
+}
+
+.userLevelBadge {
+    background-color: var(--accent-light);
+    color: var(--accent-dark);
+    font-weight: 800;
+    font-size: 0.8rem;
+    padding: 4px 12px;
+    border-radius: var(--radius-pill);
+    border: 1px solid var(--accent);
 }
 
 .badge {
-    padding: 5px 12px;
-    border-radius: 10px;
+    padding: 6px 14px;
+    border-radius: var(--radius-pill);
     font-weight: 900;
     font-size: 0.8rem;
+    border: 2px solid var(--primary);
 }
 
 .paid { background-color: var(--success); color: white; }
 .unpaid { background-color: var(--danger); color: white; }
 
+/* Attendance Management */
+.attendanceLayout {
+    display: flex;
+    flex-direction: column;
+    gap: 30px;
+}
+
+.actionsBarAttendance {
+    display: grid;
+    grid-template-columns: 1fr 1.2fr;
+    gap: 30px;
+    background-color: var(--bg);
+    border: var(--border-fun);
+    border-radius: var(--radius);
+    padding: 25px;
+    box-shadow: 0 5px 0 var(--primary);
+}
+
+.classSelectBox {
+    margin-top: 15px;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+.classSelectBox label {
+    font-weight: 900;
+    color: var(--primary);
+    font-size: 0.9rem;
+}
+
+.classSelectBox select {
+    padding: 12px;
+    font-family: inherit;
+    font-weight: 800;
+    border: var(--border-fun);
+    border-radius: var(--radius);
+    outline: none;
+    cursor: pointer;
+}
+
+.csvImportBlock {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.csvImportBlock h3 {
+    font-family: var(--font-display);
+    font-size: 1.2rem;
+}
+
+.csvTextarea {
+    width: 100%;
+    height: 70px;
+    padding: 10px;
+    border: 2px solid var(--primary);
+    border-radius: var(--radius);
+    font-family: monospace;
+    font-size: 0.85rem;
+    resize: none;
+    outline: none;
+}
+
+.gridSection h3 {
+    font-family: var(--font-display);
+    font-size: 1.4rem;
+    margin-bottom: 15px;
+}
+
+.attendanceTableWrapper {
+    max-height: 500px;
+    overflow-y: auto;
+    border: 2px solid var(--primary);
+    border-radius: var(--radius);
+}
+
+.attCheckbox {
+    width: 22px;
+    height: 22px;
+    cursor: pointer;
+    accent-color: var(--primary);
+}
+
+/* Daily Schedule links configuration */
 .actionsBar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
     margin-bottom: 30px;
+}
+
+.actionsBar h2 {
+    font-family: var(--font-display);
+    font-size: 2rem;
+    color: var(--primary);
 }
 
 .classGrid {
@@ -112,13 +258,34 @@
 
 .classCard {
     padding: 25px;
-    background-color: var(--bg);
+    background-color: white;
     border-radius: var(--radius);
-    border: 2px solid var(--primary-dark);
+    border: var(--border-fun);
+    box-shadow: 0 6px 0 var(--primary-dark);
 }
 
 .classCard h3 {
+    font-family: var(--font-display);
+    font-size: 1.4rem;
     margin-bottom: 10px;
+    color: var(--primary);
+}
+
+.cDesc {
+    color: var(--text-muted);
+    font-size: 0.95rem;
+    margin-bottom: 15px;
+    line-height: 1.4;
+    min-height: 60px;
+}
+
+.cLink {
+    font-size: 0.9rem;
+    background-color: var(--bg);
+    padding: 10px;
+    border-radius: var(--radius);
+    border: 1px dashed var(--primary);
+    word-break: break-all;
 }
 
 .cardActions {
@@ -127,6 +294,182 @@
     margin-top: 20px;
 }
 
+/* Mock Quiz Table */
+.testsTableWrapper {
+    overflow-x: auto;
+}
+
+.windowTimeText {
+    font-size: 0.85rem;
+    color: var(--text-muted);
+    font-weight: 700;
+}
+
+.testActionBtns {
+    display: flex;
+    gap: 8px;
+}
+
+/* Certificates Logs */
+.statusLabel {
+    padding: 5px 12px;
+    border-radius: var(--radius-pill);
+    font-weight: 900;
+    font-size: 0.8rem;
+    border: 1px solid;
+}
+
+.labelEligible { background-color: #E6F4EA; color: #137333; border-color: #A3E2AB; }
+.labelIneligible { background-color: #FCE8E6; color: #C5221F; border-color: #FAD2CF; }
+
+.overrideBtn {
+    padding: 8px 16px;
+    border-radius: var(--radius-pill);
+    font-weight: 800;
+    font-size: 0.85rem;
+    cursor: pointer;
+    border: 2px solid var(--primary);
+    transition: var(--transition);
+}
+
+.btnGrant { background-color: var(--accent); color: var(--primary); }
+.btnRevoke { background-color: white; color: var(--text-muted); }
+
+.overrideBtn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 3px 0 var(--primary);
+}
+
+/* Engagement Analytics Dashboard */
+.analyticsLayout {
+    display: flex;
+    flex-direction: column;
+    gap: 40px;
+}
+
+.statsDashboardGrid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 20px;
+}
+
+.statBoxCard {
+    background-color: white;
+    border: var(--border-fun);
+    border-radius: var(--radius);
+    padding: 25px;
+    text-align: center;
+    box-shadow: 0 6px 0 var(--primary);
+}
+
+.statBoxCard h3 {
+    font-size: 0.9rem;
+    color: var(--text-muted);
+    font-weight: 800;
+    text-transform: uppercase;
+    margin-bottom: 10px;
+}
+
+.statsValue {
+    font-size: 2.8rem;
+    font-weight: 900;
+    color: var(--primary);
+    margin-bottom: 5px;
+}
+
+.statBoxCard p {
+    font-size: 0.85rem;
+    color: var(--text-muted);
+    font-weight: 700;
+}
+
+.analyticsSubGrid {
+    display: grid;
+    grid-template-columns: 1.2fr 1fr;
+    gap: 30px;
+}
+
+.attChartCard, .exportsCard {
+    background-color: white;
+    border: var(--border-fun);
+    border-radius: var(--radius);
+    padding: 30px;
+    box-shadow: 0 6px 0 var(--primary);
+}
+
+.attChartCard h3, .exportsCard h3 {
+    font-family: var(--font-display);
+    font-size: 1.4rem;
+    margin-bottom: 20px;
+}
+
+.chartBarsGrid {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.chartRow {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+}
+
+.chartRowLabels {
+    display: flex;
+    justify-content: space-between;
+    font-size: 0.9rem;
+    font-weight: 800;
+}
+
+.chartProgressBar {
+    height: 12px;
+    background-color: var(--bg);
+    border-radius: 6px;
+    border: 1px solid var(--primary);
+    overflow: hidden;
+}
+
+.chartProgressBarFill {
+    height: 100%;
+    background-color: var(--accent);
+}
+
+.exportsCard p {
+    color: var(--text-muted);
+    font-size: 0.95rem;
+    margin-bottom: 25px;
+    line-height: 1.4;
+}
+
+.exportButtonsList {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+.exportBtn {
+    background-color: var(--bg);
+    border: 2px solid var(--primary);
+    border-radius: var(--radius);
+    padding: 15px 20px;
+    font-size: 1rem;
+    font-weight: 800;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    transition: var(--transition);
+}
+
+.exportBtn:hover {
+    background-color: var(--accent-light);
+    transform: translateY(-2px);
+    box-shadow: 0 4px 0 var(--primary);
+}
+
+/* Base Form inside Modals */
 .form {
     display: flex;
     flex-direction: column;
@@ -146,13 +489,44 @@
 
 .field input, .field textarea {
     padding: 12px 20px;
-    border-radius: 15px;
+    border-radius: 12px;
     border: 2px solid var(--primary);
     font-size: 1rem;
     font-weight: 700;
+    outline: none;
 }
 
 .field textarea {
-    height: 100px;
+    height: 120px;
     resize: none;
+}
+
+/* Responsive Overrides */
+@media (max-width: 992px) {
+    .classGrid {
+        grid-template-columns: 1fr;
+    }
+    .actionsBarAttendance {
+        grid-template-columns: 1fr;
+    }
+    .statsDashboardGrid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+    .analyticsSubGrid {
+        grid-template-columns: 1fr;
+    }
+}
+
+@media (max-width: 600px) {
+    .tabs {
+        overflow-x: auto;
+        justify-content: flex-start;
+        padding-bottom: 10px;
+    }
+    .tab {
+        white-space: nowrap;
+    }
+    .statsDashboardGrid {
+        grid-template-columns: 1fr;
+    }
 }

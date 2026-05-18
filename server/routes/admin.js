@@ -14,6 +14,24 @@ router.get('/users', async (req, res) => {
     res.json(users);
 });
 
+router.patch('/users/:id', async (req, res) => {
+    try {
+        const { paymentStatus } = req.body;
+        if (paymentStatus && !['pending', 'paid'].includes(paymentStatus)) {
+            return res.status(400).json({ message: 'Invalid payment status' });
+        }
+
+        const updates = {};
+        if (paymentStatus) updates.paymentStatus = paymentStatus;
+
+        const user = await User.findByIdAndUpdate(req.params.id, updates, { new: true });
+        if (!user) return res.status(404).json({ message: 'User not found' });
+        res.json(user);
+    } catch (error) {
+        res.status(500).json({ message: 'Failed to update user' });
+    }
+});
+
 // --- CLASSES ---
 router.get('/classes', async (req, res) => {
     const classes = await Class.find().sort({ day: 1 });
@@ -41,7 +59,7 @@ router.delete('/classes/:id', async (req, res) => {
 
 // --- ORDERS ---
 router.get('/orders', async (req, res) => {
-    const orders = await Order.find().populate('userId', 'name email');
+    const orders = await Order.find().populate('userId', 'fullName email');
     res.json(orders);
 });
 

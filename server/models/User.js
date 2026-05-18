@@ -21,6 +21,8 @@ const userSchema = new mongoose.Schema({
     failedLoginAttempts: { type: Number, default: 0 },
     lockUntil:         { type: Date },
     refreshTokenHash:  { type: String },
+    resetPasswordTokenHash: { type: String },
+    resetPasswordExpires: { type: Date },
     completedClasses:  [{ type: mongoose.Schema.Types.ObjectId, ref: 'Class' }], // Keeping this for compatibility
     paymentStatus:     { type: String, enum: ['pending', 'paid'], default: 'pending' }, // Keeping this for compatibility
     createdAt:         { type: Date, default: Date.now }

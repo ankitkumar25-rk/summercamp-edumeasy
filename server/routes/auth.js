@@ -8,7 +8,7 @@ const rateLimit = require('express-rate-limit');
 const User = require('../models/User');
 const RefreshToken = require('../models/RefreshToken');
 const { signToken } = require('../utils/paseto');
-const { sendOTPEmail } = require('../utils/email');
+const { sendOTPEmail, sendPasswordResetEmail } = require('../utils/email');
 const { verifyToken } = require('../middleware/auth');
 
 // CSRF Protection Middleware
@@ -22,6 +22,8 @@ const requireAjax = (req, res, next) => {
     const isAllowed = origin && (
         (allowedClientUrl && origin.startsWith(allowedClientUrl)) ||
         origin.startsWith(sameOriginUrl) ||
+        origin.startsWith('http://localhost') ||
+        origin.startsWith('http://127.0.0.1') ||
         (process.env.NODE_ENV === 'production' && origin.includes('onrender.com'))
     );
 
@@ -63,6 +65,14 @@ const resendOtpLimiter = rateLimit({
     windowMs: 60 * 1000,
     max: 1,
     message: { message: "Please wait before requesting another OTP" },
+    standardHeaders: true,
+    legacyHeaders: false
+});
+
+const forgotPasswordLimiter = rateLimit({
+    windowMs: 10 * 60 * 1000,
+    max: 3,
+    message: { message: "Too many reset attempts, please try again later." },
     standardHeaders: true,
     legacyHeaders: false
 });
@@ -111,7 +121,7 @@ router.post('/register', requireAjax, registerLimiter, [
     try {
         const existingUser = await User.findOne({ email: req.body.email });
         if (existingUser) {
-            return res.status(400).json({ message: 'Email already registered' });
+            return res.status(409).json({ message: 'Email already registered' });
         }
 
         const passwordHash = await bcrypt.hash(req.body.password, 12);
@@ -236,7 +246,7 @@ router.post('/resend-otp', requireAjax, resendOtpLimiter, [
         user.otpExpiry = new Date(Date.now() + 10 * 60 * 1000);
         await user.save();
 
-        await sendOTPEmail(req.body.email, otp);
+        await sendOTPEmail(req.body.email, user.fullName, otp);
 
         res.status(200).json({ message: "New OTP sent." });
     } catch (error) {
@@ -414,6 +424,73 @@ router.get('/me', verifyToken, async (req, res) => {
         if (!user) return res.status(404).json({ message: 'User not found' });
         res.json(user);
     } catch (error) {
+        res.status(500).json({ message: 'Server error' });
+    }
+});
+
+// 8. Forgot Password
+router.post('/forgot-password', requireAjax, forgotPasswordLimiter, [
+    body('email').isEmail()
+], validate, async (req, res) => {
+    try {
+        const user = await User.findOne({ email: req.body.email.toLowerCase() });
+
+        // Always respond success to avoid email enumeration
+        if (!user) {
+            return res.status(200).json({ message: 'If the email exists, a reset link has been sent.' });
+        }
+
+        const resetToken = crypto.randomBytes(32).toString('hex');
+        const resetTokenHash = crypto.createHash('sha256').update(resetToken).digest('hex');
+
+        user.resetPasswordTokenHash = resetTokenHash;
+        user.resetPasswordExpires = new Date(Date.now() + 60 * 60 * 1000); // 60 mins
+        await user.save();
+
+        const clientUrl = process.env.CLIENT_URL || 'http://localhost:5173';
+        const resetLink = `${clientUrl}/reset-password?token=${resetToken}&email=${encodeURIComponent(user.email)}`;
+        await sendPasswordResetEmail(user.email, user.fullName, resetLink);
+
+        return res.status(200).json({ message: 'If the email exists, a reset link has been sent.' });
+    } catch (error) {
+        console.error(error);
+        res.status(500).json({ message: 'Server error' });
+    }
+});
+
+// 9. Reset Password
+router.post('/reset-password', requireAjax, [
+    body('email').isEmail(),
+    body('token').notEmpty(),
+    passwordValidation
+], validate, async (req, res) => {
+    try {
+        const { email, token, password } = req.body;
+
+        const user = await User.findOne({ email: email.toLowerCase() });
+        if (!user || !user.resetPasswordTokenHash || !user.resetPasswordExpires) {
+            return res.status(400).json({ message: 'Invalid or expired reset token' });
+        }
+
+        if (user.resetPasswordExpires < new Date()) {
+            return res.status(400).json({ message: 'Invalid or expired reset token' });
+        }
+
+        const incomingHash = crypto.createHash('sha256').update(token).digest('hex');
+        if (incomingHash !== user.resetPasswordTokenHash) {
+            return res.status(400).json({ message: 'Invalid or expired reset token' });
+        }
+
+        user.passwordHash = await bcrypt.hash(password, 12);
+        user.resetPasswordTokenHash = undefined;
+        user.resetPasswordExpires = undefined;
+        user.failedLoginAttempts = 0;
+        user.lockUntil = undefined;
+        await user.save();
+
+        res.status(200).json({ message: 'Password updated successfully' });
+    } catch (error) {
+        console.error(error);
         res.status(500).json({ message: 'Server error' });
     }
 });
