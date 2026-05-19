@@ -11,13 +11,19 @@ app.set('trust proxy', 1);
 app.use(express.json());
 app.use(cookieParser());
 
+const extraClientUrls = (process.env.CLIENT_URLS || '')
+    .split(',')
+    .map((url) => url.trim())
+    .filter(Boolean);
+
 const allowedOrigins = [
     process.env.CLIENT_URL,
+    ...extraClientUrls,
     'http://localhost:5173',
     'http://localhost:5000',
     'http://127.0.0.1:5173',
     'http://127.0.0.1:5000'
-];
+].filter(Boolean);
 
 app.use(cors({
     origin: (origin, callback) => {
@@ -34,6 +40,8 @@ app.use(cors({
     },
     credentials: true
 }));
+
+app.options('*', cors());
 
 // Database Connection
 mongoose.connect(process.env.MONGODB_URI)
@@ -56,14 +64,20 @@ app.use('/api/analytics', require('./routes/analytics'));
 const PORT = process.env.PORT || 5000;
 
 // Serve static assets in production
-if (process.env.NODE_ENV === 'production') {
+if (process.env.NODE_ENV === 'production' && process.env.SERVE_CLIENT === 'true') {
     const path = require('path');
-    // Set static folder
-    app.use(express.static(path.join(__dirname, 'client/dist')));
+    const fs = require('fs');
+    const distPath = path.join(__dirname, '..', 'client', 'dist');
+    const indexPath = path.join(distPath, 'index.html');
 
-    app.get('/{*path}', (req, res) => {
-        res.sendFile(path.resolve(__dirname, 'client', 'dist', 'index.html'));
-    });
+    if (fs.existsSync(indexPath)) {
+        app.use(express.static(distPath));
+        app.get('/{*path}', (req, res) => {
+            res.sendFile(indexPath);
+        });
+    } else {
+        console.warn('SERVE_CLIENT=true but client dist not found, skipping static serve');
+    }
 }
 
 app.listen(PORT, () => console.log(`Server running on port ${PORT}`));

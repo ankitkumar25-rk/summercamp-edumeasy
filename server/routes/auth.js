@@ -13,6 +13,9 @@ const { verifyToken } = require('../middleware/auth');
 
 // CSRF Protection Middleware
 const requireAjax = (req, res, next) => {
+    if (req.method === 'OPTIONS') {
+        return next();
+    }
     // Basic CSRF check
     const origin = req.headers.origin || req.headers.referer;
     
