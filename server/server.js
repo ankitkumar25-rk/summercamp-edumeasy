@@ -41,7 +41,7 @@ app.use(cors({
     credentials: true
 }));
 
-app.options('*', cors());
+app.options('/*', cors());
 
 // Database Connection
 mongoose.connect(process.env.MONGODB_URI)
