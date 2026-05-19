@@ -164,17 +164,20 @@ router.post('/register', requireAjax, registerLimiter, [
             expiresAt: new Date(Date.now() + 7 * 24 * 60 * 60 * 1000)
         });
 
+        const cookieSameSite = process.env.NODE_ENV === 'production' ? 'none' : 'strict';
+        const cookieSecure = process.env.NODE_ENV === 'production';
+
         res.cookie('token', accessToken, {
             httpOnly: true,
-            secure: process.env.NODE_ENV === 'production',
-            sameSite: 'strict',
+            secure: cookieSecure,
+            sameSite: cookieSameSite,
             maxAge: 15 * 60 * 1000 // 15 mins
         });
 
         res.cookie('refreshToken', refreshTokenPlain, {
             httpOnly: true,
-            secure: process.env.NODE_ENV === 'production',
-            sameSite: 'strict',
+            secure: cookieSecure,
+            sameSite: cookieSameSite,
             maxAge: 7 * 24 * 60 * 60 * 1000 // 7 days
         });
 
@@ -301,17 +304,20 @@ router.post('/login', requireAjax, loginLimiter, [
             expiresAt: new Date(Date.now() + 7 * 24 * 60 * 60 * 1000)
         });
 
+        const cookieSameSite = process.env.NODE_ENV === 'production' ? 'none' : 'strict';
+        const cookieSecure = process.env.NODE_ENV === 'production';
+
         res.cookie('token', accessToken, {
             httpOnly: true,
-            secure: process.env.NODE_ENV === 'production',
-            sameSite: 'strict',
+            secure: cookieSecure,
+            sameSite: cookieSameSite,
             maxAge: 15 * 60 * 1000 // 15 mins
         });
 
         res.cookie('refreshToken', refreshTokenPlain, {
             httpOnly: true,
-            secure: process.env.NODE_ENV === 'production',
-            sameSite: 'strict',
+            secure: cookieSecure,
+            sameSite: cookieSameSite,
             maxAge: 7 * 24 * 60 * 60 * 1000 // 7 days
         });
 
@@ -368,17 +374,20 @@ router.post('/refresh', requireAjax, async (req, res) => {
             expiresAt: new Date(Date.now() + 7 * 24 * 60 * 60 * 1000)
         });
 
+        const cookieSameSite = process.env.NODE_ENV === 'production' ? 'none' : 'strict';
+        const cookieSecure = process.env.NODE_ENV === 'production';
+
         res.cookie('token', newAccessToken, {
             httpOnly: true,
-            secure: process.env.NODE_ENV === 'production',
-            sameSite: 'strict',
+            secure: cookieSecure,
+            sameSite: cookieSameSite,
             maxAge: 15 * 60 * 1000
         });
 
         res.cookie('refreshToken', newRefreshTokenPlain, {
             httpOnly: true,
-            secure: process.env.NODE_ENV === 'production',
-            sameSite: 'strict',
+            secure: cookieSecure,
+            sameSite: cookieSameSite,
             maxAge: 7 * 24 * 60 * 60 * 1000
         });
 
@@ -406,15 +415,18 @@ router.post('/logout', requireAjax, async (req, res) => {
         console.error(err);
     }
 
+    const cookieSameSite = process.env.NODE_ENV === 'production' ? 'none' : 'strict';
+    const cookieSecure = process.env.NODE_ENV === 'production';
+
     res.clearCookie('token', {
         httpOnly: true,
-        secure: process.env.NODE_ENV === 'production',
-        sameSite: 'strict'
+        secure: cookieSecure,
+        sameSite: cookieSameSite
     });
     res.clearCookie('refreshToken', {
         httpOnly: true,
-        secure: process.env.NODE_ENV === 'production',
-        sameSite: 'strict'
+        secure: cookieSecure,
+        sameSite: cookieSameSite
     });
     
     res.status(200).json({ message: "Logged out" });
